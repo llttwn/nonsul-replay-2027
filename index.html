@@ -146,9 +146,9 @@
 
   <!-- 미니멀 단일 상단 헤더 (좁은 폭에서 겹치지 않도록 유연 배치) -->
   <header class="sticky top-0 z-30 bg-white border-b border-zinc-200">
-    <div class="max-w-[1640px] mx-auto px-4 min-h-[52px] py-2 flex items-center justify-between gap-2.5">
+    <div class="max-w-[1640px] mx-auto px-4 min-h-[52px] py-2 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5">
       <!-- 좌: 문항 선택 -->
-      <div class="flex items-center gap-2 min-w-0 flex-1">
+      <div class="flex items-center gap-2 min-w-0 flex-1 basis-full sm:basis-0">
         <span class="text-sm font-extrabold tracking-tight text-zinc-950 shrink-0 hidden sm:inline">사고 리플레이</span>
         <select id="schoolSelect" aria-label="대학 선택" class="text-xs sm:text-[13px] font-bold px-2 py-1.5 rounded-md border border-zinc-300 bg-zinc-50 text-zinc-900 shrink-0 focus:outline-none focus:border-zinc-900"></select>
         <select id="caseSelect" aria-label="기출 문항 선택" class="text-xs sm:text-[13px] font-semibold px-2.5 py-1.5 rounded-md border border-zinc-300 bg-white text-zinc-900 min-w-0 flex-1 max-w-[360px] truncate focus:outline-none focus:border-zinc-900"></select>
@@ -158,7 +158,7 @@
       <div id="panelToggles" class="hidden xl:flex items-center gap-1 shrink-0"></div>
 
       <!-- 우: 예측 모드 + 북마크 + 메뉴 -->
-      <div class="flex items-center gap-1.5 shrink-0">
+      <div class="flex items-center gap-1.5 shrink-0 ml-auto sm:ml-0">
         <button id="predictModeBtn" type="button" aria-pressed="false" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-zinc-300 bg-white text-zinc-600 hover:border-zinc-900 hover:text-zinc-900 transition">예측 연습</button>
         <button id="bookmarkBtn" type="button" aria-label="현재 단계 북마크" aria-pressed="false" class="text-xs font-semibold px-2 py-1.5 rounded-md border border-zinc-300 bg-white text-zinc-500 hover:border-zinc-900 hover:text-zinc-900 transition" title="현재 단계 북마크 (B)">☆</button>
         <button id="settingsBtn" type="button" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-zinc-300 bg-white text-zinc-700 hover:border-zinc-900 transition">메뉴</button>
@@ -215,11 +215,12 @@
       <!-- 학교·연도별 기출 목차 -->
       <div class="space-y-2 pt-3 border-t border-zinc-200">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-extrabold text-zinc-900">3년치 기출 목차 (대학 → 연도별)</span>
-          <span class="text-[11px] text-zinc-400">2025 ~ 2027 모의</span>
+          <span class="text-xs font-extrabold text-zinc-900">학년도·회차별 문항</span>
+          <span class="text-[11px] text-zinc-400">2025·2026 기출 / 2027 모의</span>
         </div>
+        <p class="text-[11px] leading-relaxed text-zinc-500">리플레이는 표시된 소문항을 발췌·재구성했습니다. 각 회차의 전체 문제는 공식 원문 링크에서 확인할 수 있습니다.</p>
         <div id="catalogSchoolTabs" class="flex flex-wrap gap-1"></div>
-        <div id="catalogListWrap" class="max-h-56 overflow-y-auto pr-1 space-y-2"></div>
+        <div id="catalogListWrap" class="max-h-72 overflow-y-auto pr-1 space-y-2"></div>
       </div>
 
       <!-- 구간 빠른 점프 & 북마크 -->
@@ -358,12 +359,328 @@
       { school: "인하대", date: "2026-12-06", label: "12/06 (일)", note: "100분 · 3문항 · 오전 45~55 / 오후 60~68" }
     ];
 
+    const SOURCE_PAPERS = [
+      {
+        "id": "kw-2027-mock",
+        "school": "광운대",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "links": [
+          {
+            "label": "문항 1 문제·해설",
+            "url": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=749"
+          },
+          {
+            "label": "문항 2 문제·해설",
+            "url": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
+          }
+        ],
+        "verifiedOn": "2026-11-22",
+        "publicationYear": 2026
+      },
+      {
+        "id": "kw-2026-1",
+        "school": "광운대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "1교시",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://iphak.kw.ac.kr/upload_data/enter/20260610162232_11.pdf#page=17"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "kw-2026-2",
+        "school": "광운대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "2교시",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://iphak.kw.ac.kr/upload_data/enter/20260610162232_11.pdf#page=33"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "kw-2025-1",
+        "school": "광운대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "1교시",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://iphak.kw.ac.kr/upload_data/mojib/20250605091213_13.pdf#page=17"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "kw-2025-2",
+        "school": "광운대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "2교시",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://iphak.kw.ac.kr/upload_data/mojib/20250605091213_13.pdf#page=38"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "sj-2027-mock",
+        "school": "세종대",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
+          }
+        ],
+        "verifiedOn": "2026-11-22",
+        "publicationYear": 2026
+      },
+      {
+        "id": "sj-2026-a",
+        "school": "세종대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "A형",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "sj-2026-b",
+        "school": "세종대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "B형",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "sj-2025-a",
+        "school": "세종대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "A형",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "sj-2025-b",
+        "school": "세종대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "B형",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=15"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "aj-2027-mock",
+        "school": "아주대",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "links": [
+          {
+            "label": "전체 문제·해설(ZIP)",
+            "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4622"
+          }
+        ],
+        "verifiedOn": "2026-11-22",
+        "publicationYear": 2026,
+        "note": "대학의 수정본 반영 자료"
+      },
+      {
+        "id": "aj-2026-am",
+        "school": "아주대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오전",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4589"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "aj-2026-pm",
+        "school": "아주대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오후",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4590"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "aj-2025-am",
+        "school": "아주대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오전",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "aj-2025-pm",
+        "school": "아주대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오후",
+        "links": [
+          {
+            "label": "전체 문제·해설",
+            "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4442"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "ih-2027-mock",
+        "school": "인하대",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=4"
+          },
+          {
+            "label": "해설(7월 28일 수정)",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=6"
+          },
+          {
+            "label": "3-3 정정 해설",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=7"
+          }
+        ],
+        "verifiedOn": "2026-11-22",
+        "publicationYear": 2026
+      },
+      {
+        "id": "ih-2026-am",
+        "school": "인하대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오전",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=6"
+          },
+          {
+            "label": "해설",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "ih-2026-pm",
+        "school": "인하대",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오후",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=2"
+          },
+          {
+            "label": "해설",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=3"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "ih-2025-am",
+        "school": "인하대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오전",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=2"
+          },
+          {
+            "label": "해설",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      },
+      {
+        "id": "ih-2025-pm",
+        "school": "인하대",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오후",
+        "links": [
+          {
+            "label": "전체 문제",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=3"
+          },
+          {
+            "label": "해설",
+            "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
+          }
+        ],
+        "verifiedOn": "2026-11-22"
+      }
+    ];
+
     const BASE_REPLAY_CASES = [
       {
         "id": "tut-prod",
         "school": "튜토리얼",
         "year": "예시",
-        "title": "곱의 미분법 기본 리플레이",
+        "title": "연습 문항 1",
         "passages": [
           {
             "label": "제시문",
@@ -782,13 +1099,16 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 0,
+        "examKind": "tutorial",
+        "session": "예시"
       },
       {
         "id": "kw-2027-mock-1-q1",
         "school": "광운대",
-        "year": "2027 모의",
-        "title": "수학적 귀납법 n! ≥ n² 증명",
+        "year": "2027학년도 모의논술",
+        "title": "문항 1 · 소문항 [1]",
         "passages": [
           {
             "label": "제시문 1",
@@ -1185,13 +1505,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "kw-2027-mock",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "kw-2027-mock-1-q45",
         "school": "광운대",
-        "year": "2027 모의",
-        "title": "항등식 계수 비교 a⁵+b⁵와 진단키트 조건부확률",
+        "year": "2027학년도 모의논술",
+        "title": "문항 1 · 소문항 [4], [5]",
         "passages": [
           {
             "label": "제시문 3",
@@ -1803,13 +2129,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 104,
+        "paperId": "kw-2027-mock",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "kw-2026-2-1-q2",
         "school": "광운대",
-        "year": "2026 2교시",
-        "title": "이차함수 정점과 선분 AB 근의 분리",
+        "year": "2026학년도 2교시",
+        "title": "문항 1 · 소문항 [2] (1), (2)",
         "passages": [
           {
             "label": "제시문 2",
@@ -2369,13 +2701,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 102,
+        "paperId": "kw-2026-2",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "2교시",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "kw-2026-2-1-q14",
         "school": "광운대",
-        "year": "2026 2교시",
-        "title": "중첩 시그마 세제곱 합 변환과 표본평균 표준화",
+        "year": "2026학년도 2교시",
+        "title": "문항 1 · 소문항 [1], [4]",
         "passages": [
           {
             "label": "제시문 1",
@@ -2908,13 +3246,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "kw-2026-2",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "2교시",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "kw-2025-1-1-q1",
         "school": "광운대",
-        "year": "2025 1교시",
-        "title": "직각삼각형 외접원·내접원과 두 원 위 점 거리",
+        "year": "2025학년도 1교시",
+        "title": "문항 1 · 소문항 [1] (1), (2)",
         "passages": [
           {
             "label": "제시문 1",
@@ -3430,13 +3774,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "kw-2025-1",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "1교시",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "kw-2025-2-2-q1",
         "school": "광운대",
-        "year": "2025 2교시",
-        "title": "임의의 두 실수 부등식 f(x₁) ≥ g(x₂)와 k의 최댓값",
+        "year": "2025학년도 2교시",
+        "title": "문항 2 · 소문항 [1]",
         "passages": [
           {
             "label": "제시문 1",
@@ -3940,13 +4290,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 201,
+        "paperId": "kw-2025-2",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "2교시",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "sj-2027-mock-1-q1",
         "school": "세종대",
-        "year": "2027 모의",
-        "title": "이차함수 접점 P와 접원 중심 Q 좌표",
+        "year": "2027학년도 모의논술",
+        "title": "문항 1 · 소문항 (1-1)",
         "passages": [
           {
             "label": "핵심 도형 조건",
@@ -4380,13 +4736,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "sj-2027-mock",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "sj-2027-mock-3-q2",
         "school": "세종대",
-        "year": "2027 모의",
-        "title": "x ≥ 0 증가 조건과 음수 근 케이스 (판별식 함정)",
+        "year": "2027학년도 모의논술",
+        "title": "문항 3 · 소문항 (3-2)",
         "passages": [
           {
             "label": "앞 소문항 결과",
@@ -4829,13 +5191,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 302,
+        "paperId": "sj-2027-mock",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "sj-2026-b-2-q1",
         "school": "세종대",
-        "year": "2026 B형",
-        "title": "연속 구간함수와 극값 1개 조건",
+        "year": "2026학년도 B형",
+        "title": "문항 2 · 소문항 (2-1)",
         "passages": [
           {
             "label": "문제 조건",
@@ -5282,13 +5650,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 201,
+        "paperId": "sj-2026-b",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "B형",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "sj-2025-a-1-q12",
         "school": "세종대",
-        "year": "2025 A형",
-        "title": "삼차함수 정적분 0 조건 극댓값과 치환적분 g''(-a)",
+        "year": "2025학년도 A형",
+        "title": "문항 1 · 소문항 (1-1), (1-2)",
         "passages": [
           {
             "label": "조건",
@@ -5900,13 +6274,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "sj-2025-a",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "A형",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "aj-2027-mock-2-q1",
         "school": "아주대",
-        "year": "2027 모의",
-        "title": "절댓값 이차함수 격자점 부호합",
+        "year": "2027학년도 모의논술",
+        "title": "문항 2 · 2-1 (1), (2)",
         "passages": [
           {
             "label": "제시문 핵심",
@@ -6549,13 +6929,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 201,
+        "paperId": "aj-2027-mock",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "aj-2026-am-1-q1",
         "school": "아주대",
-        "year": "2026 오전",
-        "title": "구간별 삼차함수 두 접선 ℓ₁, ℓ₂ 교점 극한 a(t)",
+        "year": "2026학년도 오전",
+        "title": "문항 1 · 1-1 (1)",
         "passages": [
           {
             "label": "제시문 (가)",
@@ -7151,13 +7537,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "aj-2026-am",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오전",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "aj-2026-pm-1-q1",
         "school": "아주대",
-        "year": "2026 오후",
-        "title": "정다각형 수선의 발 원과 직선군 mⱼ 교점 대칭합",
+        "year": "2026학년도 오후",
+        "title": "문항 1 · 1-1 (1), 1-2 (1)",
         "passages": [
           {
             "label": "제시문 (가)·(나)",
@@ -7660,13 +8052,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 101,
+        "paperId": "aj-2026-pm",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오후",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "aj-2025-am-1-q2",
         "school": "아주대",
-        "year": "2025 오전",
-        "title": "원과 대칭 직선 교점 극한 c 및 직선 PQ 절편 극한 n",
+        "year": "2025학년도 오전",
+        "title": "문항 1 · 1-2 (1), (2)",
         "passages": [
           {
             "label": "제시문 (나)",
@@ -8233,13 +8631,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 102,
+        "paperId": "aj-2025-am",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오전",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "ih-2027-mock-3-q2",
         "school": "인하대",
-        "year": "2027 모의",
-        "title": "합성함수 f(|x|+a) 미분가능성",
+        "year": "2027학년도 모의논술",
+        "title": "문항 3 · 소문항 (3-2)",
         "passages": [
           {
             "label": "제시문 (미분계수의 정의)",
@@ -8642,13 +9046,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 302,
+        "paperId": "ih-2027-mock",
+        "academicYear": 2027,
+        "examKind": "mock",
+        "session": "모의논술",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "ih-2026-am-3-q12",
         "school": "인하대",
-        "year": "2026 오전",
-        "title": "사차함수 차분 g(x)와 정수 격자 단조 조건",
+        "year": "2026학년도 오전",
+        "title": "문항 3 · 소문항 (3-1), (3-2)",
         "passages": [
           {
             "label": "제시문",
@@ -9255,13 +9665,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 301,
+        "paperId": "ih-2026-am",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오전",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "ih-2026-pm-2-q12",
         "school": "인하대",
-        "year": "2026 오후",
-        "title": "삼각형 내접 정사각형 넓이와 산술·기하 평균 최대",
+        "year": "2026학년도 오후",
+        "title": "문항 2 · 소문항 (2-1), (2-2)",
         "passages": [
           {
             "label": "제시문",
@@ -9722,13 +10138,19 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 201,
+        "paperId": "ih-2026-pm",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "오후",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       },
       {
         "id": "ih-2025-am-3-q12",
         "school": "인하대",
-        "year": "2025 오전",
-        "title": "이차함수 접선 사다리꼴 넓이와 평행이동·최솟값",
+        "year": "2025학년도 오전",
+        "title": "문항 3 · 소문항 (3-1), (3-2)",
         "passages": [
           {
             "label": "제시문",
@@ -10379,7 +10801,2646 @@
               }
             ]
           }
-        ]
+        ],
+        "questionOrder": 301,
+        "paperId": "ih-2025-am",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오전",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
+      },
+      {
+        "id": "kw-2026-1-1-q1",
+        "school": "광운대",
+        "year": "2026학년도 1교시",
+        "title": "문항 1 · 소문항 [1]",
+        "passages": [
+          {
+            "label": "제시문",
+            "text": "유한집합 $A$의 원소 개수를 $n(A)$로 나타낸다. [[g:p1|이항정리 $(a+b)^n=\\sum_{k=0}^n {n\\choose k}a^k b^{n-k}$]]를 이용할 수 있다."
+          }
+        ],
+        "problems": [
+          {
+            "num": "[1]",
+            "text": "전체집합 [[g:q1|$U=\\{1,2,3,4,5,6\\}$]]의 두 부분집합 $A,B$가 [[g:q2|$n(A)n(B)\\ne0$, $n(B)<n(U)$, $A\\subset B$]]를 만족하는 경우의 수를 구하시오. 여기서 $\\subset$는 등호를 허용하는 포함관계이다."
+          }
+        ],
+        "steps": [
+          {
+            "sourceStep": 1,
+            "phase": "읽기",
+            "gaze": [
+              "q1"
+            ],
+            "reaction": "전체 원소는 여섯 개네. 순서가 있는 두 집합 $A,B$를 고르는 문제야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s1",
+                "text": "$n(U)=6$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 2,
+            "phase": "읽기",
+            "gaze": [
+              "q2"
+            ],
+            "reaction": "곱이 $0$이 아니니 두 집합 모두 비어 있지 않아야 하네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s2",
+                "text": "$A\\ne\\varnothing,\\quad B\\ne\\varnothing$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 3,
+            "phase": "읽기",
+            "gaze": [
+              "q2"
+            ],
+            "reaction": "$B$는 전체집합보다 작아야 해. 따라서 크기는 $1$부터 $5$까지야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s3",
+                "text": "$1\\le n(B)\\le5$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 4,
+            "phase": "설계",
+            "gaze": [
+              "q2",
+              "s3"
+            ],
+            "reaction": "$B$를 먼저 고르면 그 안에서 $A$를 고를 수 있겠어. 같은 집합을 고르는 경우도 허용돼.",
+            "designOps": [
+              {
+                "type": "add",
+                "id": "d1",
+                "kind": "목표",
+                "text": "$B$의 크기별로 $A$의 선택 수를 합하기",
+                "checkable": true,
+                "checked": false
+              }
+            ],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 5,
+            "phase": "설계",
+            "gaze": [
+              "s3"
+            ],
+            "reaction": "$B$의 원소 수를 $k$라 두고, 고정된 $k$에서의 경우의 수를 구하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s4",
+                "text": "$n(B)=k,\\quad k=1,2,3,4,5$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 6,
+            "phase": "계산",
+            "gaze": [
+              "q1",
+              "s4"
+            ],
+            "reaction": "여섯 원소 중 $k$개를 골라 $B$를 만들면 되네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s5",
+                "text": "$B\\text{의 선택 수}={6\\choose k}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 7,
+            "phase": "계산",
+            "gaze": [
+              "q2",
+              "s4"
+            ],
+            "reaction": "고정된 $B$의 부분집합은 $2^k$개야. 여기서 공집합만 빼자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s6",
+                "text": "$A\\text{의 선택 수}=2^k-1$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 8,
+            "phase": "검산",
+            "gaze": [
+              "s6"
+            ],
+            "reaction": "$A=B$를 빼면 안 돼. 예를 들어 $B$가 한 원소일 때 $A=B$ 하나가 허용되잖아.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s7",
+                "text": "$k=1:\\quad 2^1-1=1$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 9,
+            "phase": "계산",
+            "gaze": [
+              "s5",
+              "s6"
+            ],
+            "reaction": "$B$를 고른 뒤 $A$를 고르니까 곱의 법칙을 쓰자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s8",
+                "text": "$n(B)=k\\text{일 때 }{6\\choose k}(2^k-1)$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 10,
+            "phase": "계산",
+            "gaze": [
+              "s4",
+              "s8"
+            ],
+            "reaction": "서로 다른 $k$는 겹치지 않으니 모두 더하면 돼.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s9",
+                "text": "$N=\\sum_{k=1}^{5}{6\\choose k}(2^k-1)$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 11,
+            "phase": "설계",
+            "gaze": [
+              "p1",
+              "s9"
+            ],
+            "reaction": "이항정리를 쓰려면 $k=0$과 $k=6$까지 채우면 편하겠어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s10",
+                "text": "$\\sum_{k=0}^{6}{6\\choose k}(2^k-1)=(1+2)^6-(1+1)^6$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 12,
+            "phase": "계산",
+            "gaze": [
+              "s10"
+            ],
+            "reaction": "두 거듭제곱을 계산하면 $729-64$네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s11",
+                "text": "$3^6-2^6=729-64=665$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 13,
+            "phase": "계산",
+            "gaze": [
+              "s9",
+              "s10"
+            ],
+            "reaction": "추가한 $k=0$항은 $0$이고, $k=6$항은 $63$이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s12",
+                "text": "${6\\choose0}(2^0-1)=0,\\quad {6\\choose6}(2^6-1)=63$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 14,
+            "phase": "계산",
+            "gaze": [
+              "s11",
+              "s12"
+            ],
+            "reaction": "원래 합으로 돌아가려면 $63$을 빼면 되겠네.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d1",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s13",
+                "text": "$N=665-63=602$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 15,
+            "phase": "검산",
+            "gaze": [
+              "s9"
+            ],
+            "reaction": "다섯 크기의 항을 직접 더해서도 확인해 보자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s14",
+                "text": "$6+45+140+225+186=602$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 16,
+            "phase": "답안 작성",
+            "gaze": [
+              "s3",
+              "s5",
+              "s6"
+            ],
+            "reaction": "답안에는 먼저 $B$의 크기와 각 선택 수를 분명히 쓰자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a1",
+                "text": "$n(B)=k$라 하면 $1\\le k\\le5$이다. $B$를 고르는 방법은 ${6\\choose k}$가지이고, 각 $B$에 대하여 공집합이 아닌 부분집합 $A$를 고르는 방법은 $2^k-1$가지이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s3",
+                  "s5",
+                  "s6"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 17,
+            "phase": "답안 작성",
+            "gaze": [
+              "s9",
+              "s10",
+              "s12"
+            ],
+            "reaction": "이항정리를 쓴 뒤 추가한 끝항을 빼는 과정을 남기자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a2",
+                "text": "따라서 구하는 수는 $\\sum_{k=1}^{5}{6\\choose k}(2^k-1)=3^6-2^6-(2^6-1)$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s9",
+                  "s10",
+                  "s12"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 18,
+            "phase": "답안 작성",
+            "gaze": [
+              "s13"
+            ],
+            "reaction": "마지막은 계산한 경우의 수로 마무리하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a3",
+                "text": "이를 계산하면 $729-64-63=602$이므로 구하는 경우의 수는 $602$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s13"
+                ]
+              }
+            ]
+          }
+        ],
+        "questionOrder": 101,
+        "paperId": "kw-2026-1",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "1교시",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
+      },
+      {
+        "id": "sj-2026-a-1-q123",
+        "school": "세종대",
+        "year": "2026학년도 A형",
+        "title": "문항 1 · 소문항 (1-1)~(1-3)",
+        "passages": [
+          {
+            "label": "제시문",
+            "text": "[[g:p1|$x\\ge0$에서 증가하는 연속함수 $f$의 역함수 $F=f^{-1}$는 $x\\ge0$에서 연속]]이며, [[g:p2|$\\int_0^x e^{-t}F(t)\\,dt=x^2$]]를 만족한다."
+          }
+        ],
+        "problems": [
+          {
+            "num": "(1-1)",
+            "text": "[[g:q1|$F(\\ln2)$, $F(\\frac12)$, $f\\prime(F(\\frac12))$]]를 구하시오."
+          },
+          {
+            "num": "(1-2)",
+            "text": "[[g:q2|$\\int_0^{\\sqrt e}f(x)\\,dx$]]를 구하시오."
+          },
+          {
+            "num": "(1-3)",
+            "text": "$0\\le x\\le4\\ln2$에서 $g(x)=f(x)-\\frac{x}{4}$라 하자. [[g:q3|$g$가 $x=\\alpha$에서 최댓값을 가질 때 $g(\\alpha)$를 $\\alpha$의 유리식]]으로 나타내시오."
+          }
+        ],
+        "steps": [
+          {
+            "sourceStep": 1,
+            "phase": "읽기",
+            "gaze": [
+              "p1",
+              "p2"
+            ],
+            "reaction": "원래 함수보다 역함수가 적분 안에 있네. 우선 $F$를 구하자.",
+            "designOps": [
+              {
+                "type": "add",
+                "id": "d1",
+                "kind": "목표",
+                "text": "$F$를 구해 (1-1)의 세 값 계산",
+                "checkable": true,
+                "checked": false
+              },
+              {
+                "type": "add",
+                "id": "d2",
+                "kind": "목표",
+                "text": "(1-2)의 정적분 계산",
+                "checkable": true,
+                "checked": false
+              },
+              {
+                "type": "add",
+                "id": "d3",
+                "kind": "목표",
+                "text": "(1-3)의 최댓값 표현",
+                "checkable": true,
+                "checked": false
+              }
+            ],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 2,
+            "phase": "설계",
+            "gaze": [
+              "p2"
+            ],
+            "reaction": "피적분함수는 연속이니까 정적분과 미분의 관계를 쓸 수 있어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s1",
+                "text": "$e^{-x}F(x)=2x\\quad(x\\ge0)$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 3,
+            "phase": "계산",
+            "gaze": [
+              "s1"
+            ],
+            "reaction": "$e^{-x}$는 항상 양수야. 양변에 $e^x$를 곱하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s2",
+                "text": "$F(x)=2xe^x$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 4,
+            "phase": "계산",
+            "gaze": [
+              "s2",
+              "q1"
+            ],
+            "reaction": "첫 값은 $e^{\\ln2}=2$를 쓰면 돼.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s3",
+                "text": "$F(\\ln2)=2\\ln2\\cdot2=4\\ln2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 5,
+            "phase": "계산",
+            "gaze": [
+              "s2",
+              "q1"
+            ],
+            "reaction": "$x=\\frac12$에서는 앞의 계수가 $1$이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s4",
+                "text": "$F(\\frac12)=e^{1/2}=\\sqrt e$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 6,
+            "phase": "계산",
+            "gaze": [
+              "s2"
+            ],
+            "reaction": "역함수의 도함수를 먼저 구하자. 곱미분의 두 항을 모두 적어야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s5",
+                "text": "$F\\prime(x)=2e^x+2xe^x=2(x+1)e^x$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 7,
+            "phase": "계산",
+            "gaze": [
+              "s5"
+            ],
+            "reaction": "$\\frac12$을 넣으면 $3\\sqrt e$가 나와.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s6",
+                "text": "$F\\prime(\\frac12)=3\\sqrt e>0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 8,
+            "phase": "계산",
+            "gaze": [
+              "s6",
+              "q1"
+            ],
+            "reaction": "역함수 관계에서 미분계수는 서로 역수야. 분모가 양수인 것도 확인했지.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d1",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s7",
+                "text": "$f\\prime(F(\\frac12))=\\frac1{F\\prime(\\frac12)}=\\frac1{3\\sqrt e}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 9,
+            "phase": "읽기",
+            "gaze": [
+              "q2",
+              "s4"
+            ],
+            "reaction": "적분 위끝 $\\sqrt e$는 $F(\\frac12)$야. 역함수의 넓이 관계를 쓰기 좋은 끝점이네.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 10,
+            "phase": "설계",
+            "gaze": [
+              "s2"
+            ],
+            "reaction": "$F(0)=0$이니 원래 함수도 원점을 지나겠어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s8",
+                "text": "$F(0)=0,\\quad f(0)=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 11,
+            "phase": "설계",
+            "gaze": [
+              "s4",
+              "s8"
+            ],
+            "reaction": "변수 이름을 바꿔 $x=F(t)$로 놓고 부분적분하면 역함수 적분을 연결할 수 있어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s9",
+                "text": "$\\int_0^{\\sqrt e}f(x)\\,dx=\\frac{\\sqrt e}{2}-\\int_0^{1/2}F(t)\\,dt$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 12,
+            "phase": "계산",
+            "gaze": [
+              "s2",
+              "s9"
+            ],
+            "reaction": "남은 적분의 피적분함수는 $2te^t$야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s10",
+                "text": "$\\int_0^{1/2}F(t)\\,dt=\\int_0^{1/2}2te^t\\,dt$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 13,
+            "phase": "계산",
+            "gaze": [
+              "s10"
+            ],
+            "reaction": "부분적분을 쓰면 원시함수는 $2(t-1)e^t$네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s11",
+                "text": "$\\int2te^t\\,dt=2te^t-2e^t=2(t-1)e^t+C$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 14,
+            "phase": "계산",
+            "gaze": [
+              "s10",
+              "s11"
+            ],
+            "reaction": "위끝과 아래끝을 빼면 $2-\\sqrt e$야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s12",
+                "text": "$\\int_0^{1/2}2te^t\\,dt=[2(t-1)e^t]_0^{1/2}=2-\\sqrt e$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 15,
+            "phase": "계산",
+            "gaze": [
+              "s9",
+              "s12"
+            ],
+            "reaction": "직사각형 넓이에서 빼면 원하는 적분값이 나오네.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d2",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s13",
+                "text": "$\\int_0^{\\sqrt e}f(x)\\,dx=\\frac{3\\sqrt e}{2}-2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 16,
+            "phase": "검산",
+            "gaze": [
+              "s4",
+              "s13"
+            ],
+            "reaction": "적분 구간에서 $0\\le f(x)\\le\\frac12$니까 결과는 $0$과 $\\frac{\\sqrt e}{2}$ 사이여야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s14",
+                "text": "$0<\\frac{3\\sqrt e}{2}-2<\\frac{\\sqrt e}{2}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 17,
+            "phase": "읽기",
+            "gaze": [
+              "q3",
+              "s3"
+            ],
+            "reaction": "이번에는 $f$에서 직선을 뺀 함수의 최대야. 양 끝값부터 확인하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s15",
+                "text": "$g(0)=0,\\quad g(4\\ln2)=\\ln2-\\ln2=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 18,
+            "phase": "설계",
+            "gaze": [
+              "s5"
+            ],
+            "reaction": "$u=f(x)$로 놓으면 $x=F(u)$야. 도함수도 $u$로 표현하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s16",
+                "text": "$g\\prime(x)=\\frac1{2(u+1)e^u}-\\frac14,\\quad u=f(x)$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 19,
+            "phase": "계산",
+            "gaze": [
+              "s16"
+            ],
+            "reaction": "도함수가 $0$이 되는 조건을 양수 분모로 정리하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s17",
+                "text": "$g\\prime(x)=0\\quad\\Rightarrow\\quad (u+1)e^u=2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 20,
+            "phase": "검산",
+            "gaze": [
+              "s17"
+            ],
+            "reaction": "$(u+1)e^u$는 이 구간에서 증가해. $u=0$에서 $1$, $u=\\ln2$에서 $2(1+\\ln2)>2$니까 해는 안쪽에 하나뿐이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s18",
+                "text": "$\\{(u+1)e^u\\}\\prime=(u+2)e^u>0\\quad(0\\le u\\le\\ln2)$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 21,
+            "phase": "설계",
+            "gaze": [
+              "s16",
+              "s18"
+            ],
+            "reaction": "분모가 증가하니 $g\\prime$는 양수에서 음수로 바뀌어. 이 점이 구간 전체의 최대점이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s19",
+                "text": "$x<\\alpha\\text{에서 }g\\prime(x)>0,\\quad x>\\alpha\\text{에서 }g\\prime(x)<0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 22,
+            "phase": "계산",
+            "gaze": [
+              "s2",
+              "s17"
+            ],
+            "reaction": "최대점에서는 $e^u=\\frac2{u+1}$이므로 $\\alpha$와 $u$를 연결할 수 있겠어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s20",
+                "text": "$\\alpha=F(u)=2ue^u=\\frac{4u}{u+1}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 23,
+            "phase": "계산",
+            "gaze": [
+              "s20"
+            ],
+            "reaction": "$u$를 남기지 않게 이 일차관계를 풀자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s21",
+                "text": "$\\alpha(u+1)=4u\\quad\\Rightarrow\\quad u=\\frac\\alpha{4-\\alpha}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 24,
+            "phase": "계산",
+            "gaze": [
+              "s21",
+              "q3"
+            ],
+            "reaction": "$g(\\alpha)=u-\\frac\\alpha4$에 대입하면 유리식으로 정리돼.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d3",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s22",
+                "text": "$g(\\alpha)=\\frac\\alpha{4-\\alpha}-\\frac\\alpha4=\\frac{\\alpha^2}{4(4-\\alpha)}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 25,
+            "phase": "검산",
+            "gaze": [
+              "s22"
+            ],
+            "reaction": "$0<\\alpha<4\\ln2<4$라 분모와 분자가 모두 양수야. 끝값 $0$보다 큰 최대라는 판단과도 맞네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s23",
+                "text": "$0<\\alpha<4\\ln2<4\\quad\\Rightarrow\\quad g(\\alpha)>0$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 26,
+            "phase": "답안 작성",
+            "gaze": [
+              "s1",
+              "s2",
+              "s3",
+              "s4"
+            ],
+            "reaction": "첫 답안은 적분 조건을 미분한 근거부터 쓰자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a1",
+                "text": "(1-1) 적분 조건의 양변을 미분하면 $e^{-x}F(x)=2x$이므로 $F(x)=2xe^x$이다. 따라서 $F(\\ln2)=4\\ln2$, $F(\\frac12)=\\sqrt e$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s1",
+                  "s2",
+                  "s3",
+                  "s4"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 27,
+            "phase": "답안 작성",
+            "gaze": [
+              "s5",
+              "s6",
+              "s7"
+            ],
+            "reaction": "역함수 미분공식의 적용 결과를 따로 적자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a2",
+                "text": "$F\\prime(\\frac12)=3\\sqrt e$이므로 $f\\prime(F(\\frac12))=\\frac1{3\\sqrt e}$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s5",
+                  "s6",
+                  "s7"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 28,
+            "phase": "답안 작성",
+            "gaze": [
+              "s9",
+              "s12",
+              "s13"
+            ],
+            "reaction": "둘째 답안은 역함수 적분과 실제 계산을 연결하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a3",
+                "text": "(1-2) $F(0)=0$, $F(\\frac12)=\\sqrt e$이므로 $\\int_0^{\\sqrt e}f(x)\\,dx=\\frac{\\sqrt e}{2}-\\int_0^{1/2}2te^t\\,dt=\\frac{3\\sqrt e}{2}-2$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s9",
+                  "s12",
+                  "s13"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 29,
+            "phase": "답안 작성",
+            "gaze": [
+              "s16",
+              "s17",
+              "s18",
+              "s19"
+            ],
+            "reaction": "셋째 답안에서는 정지점이 최대점인 이유를 남기자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a4",
+                "text": "(1-3) $u=f(x)$라 하면 $g\\prime(x)=\\frac1{2(u+1)e^u}-\\frac14$이다. $(u+1)e^u$는 $[0,\\ln2]$에서 증가하며 값 $2$를 한 번 지나므로 $g\\prime$는 양에서 음으로 바뀐다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s16",
+                  "s17",
+                  "s18",
+                  "s19"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 30,
+            "phase": "답안 작성",
+            "gaze": [
+              "s20",
+              "s21",
+              "s22"
+            ],
+            "reaction": "마지막에는 $u$를 소거한 식으로 질문에 답하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a5",
+                "text": "최대점에서 $(u+1)e^u=2$이고 $\\alpha=2ue^u=\\frac{4u}{u+1}$이므로 $u=\\frac\\alpha{4-\\alpha}$이다. 따라서 $g(\\alpha)=\\frac{\\alpha^2}{4(4-\\alpha)}$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s20",
+                  "s21",
+                  "s22"
+                ]
+              }
+            ]
+          }
+        ],
+        "questionOrder": 101,
+        "paperId": "sj-2026-a",
+        "academicYear": 2026,
+        "examKind": "past",
+        "session": "A형",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
+      },
+      {
+        "id": "sj-2025-b-2-q12",
+        "school": "세종대",
+        "year": "2025학년도 B형",
+        "title": "문항 2 · 소문항 (2-1), (2-2)",
+        "passages": [
+          {
+            "label": "제시문",
+            "text": "최고차항의 계수가 $1$인 삼차함수 $f$가 [[g:p1|모든 실수 $x$에 대하여 $f(-x)-f(0)=-\\{f(x)-f(0)\\}$]]을 만족하고, [[g:p2|$f(x)=|x|$의 서로 다른 실근은 정확히 $2$개]]이다."
+          }
+        ],
+        "problems": [
+          {
+            "num": "(2-1)",
+            "text": "[[g:q1|$f(0)=c$일 때 $\\int_{-1}^{1}f(x)\\,dx$]]를 $c$로 나타내시오."
+          },
+          {
+            "num": "(2-2)",
+            "text": "[[g:q2|$f(0)=0$일 때 $f(x)=|x|$의 $0$이 아닌 실근 $k$의 범위]]를 구하시오."
+          }
+        ],
+        "steps": [
+          {
+            "sourceStep": 1,
+            "phase": "읽기",
+            "gaze": [
+              "p1"
+            ],
+            "reaction": "상수항을 뺀 함수가 원점에 대해 대칭이라는 조건이네.",
+            "designOps": [
+              {
+                "type": "add",
+                "id": "d1",
+                "kind": "목표",
+                "text": "(2-1)의 정적분 계산",
+                "checkable": true,
+                "checked": false
+              },
+              {
+                "type": "add",
+                "id": "d2",
+                "kind": "목표",
+                "text": "(2-2)의 근 개수와 범위 판정",
+                "checkable": true,
+                "checked": false
+              }
+            ],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 2,
+            "phase": "설계",
+            "gaze": [
+              "p1",
+              "q1"
+            ],
+            "reaction": "일반적인 삼차식을 놓고 계수로 조건을 확인하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s1",
+                "text": "$f(x)=x^3+ax^2+bx+c$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 3,
+            "phase": "계산",
+            "gaze": [
+              "p1",
+              "s1"
+            ],
+            "reaction": "$-x$를 넣고 상수항을 빼면 이렇게 되네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s2",
+                "text": "$f(-x)-c=-x^3+ax^2-bx$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 4,
+            "phase": "계산",
+            "gaze": [
+              "s1",
+              "s2"
+            ],
+            "reaction": "반대쪽은 이차항의 부호가 달라. 모든 $x$에서 같아야 하니 이차항이 없어야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s3",
+                "text": "$-x^3+ax^2-bx=-x^3-ax^2-bx\\quad\\Rightarrow\\quad a=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 5,
+            "phase": "계산",
+            "gaze": [
+              "s3"
+            ],
+            "reaction": "따라서 홀수차 항에 상수 $c$를 더한 식이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s4",
+                "text": "$f(x)=x^3+bx+c$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 6,
+            "phase": "설계",
+            "gaze": [
+              "s4",
+              "q1"
+            ],
+            "reaction": "대칭구간에서 홀함수 부분의 적분은 $0$이지.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s5",
+                "text": "$\\int_{-1}^{1}(x^3+bx)\\,dx=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 7,
+            "phase": "계산",
+            "gaze": [
+              "s4",
+              "s5"
+            ],
+            "reaction": "상수함수의 직사각형 넓이만 남네.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d1",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s6",
+                "text": "$\\int_{-1}^{1}f(x)\\,dx=0+\\int_{-1}^{1}c\\,dx=2c$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 8,
+            "phase": "읽기",
+            "gaze": [
+              "q2",
+              "s4"
+            ],
+            "reaction": "다음 소문항에서는 $c=0$을 따로 적용해야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s7",
+                "text": "$f(0)=0\\quad\\Rightarrow\\quad f(x)=x^3+bx$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 9,
+            "phase": "설계",
+            "gaze": [
+              "p2",
+              "s7"
+            ],
+            "reaction": "$x=0$은 이미 근이네. 양수와 음수 쪽에서 추가 근이 몇 개 생기는지 나누자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s8",
+                "text": "$f(0)=|0|=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 10,
+            "phase": "계산",
+            "gaze": [
+              "s7"
+            ],
+            "reaction": "$x>0$이면 절댓값을 $x$로 바꿀 수 있어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s9",
+                "text": "$x^3+bx=x\\quad\\Rightarrow\\quad x(x^2+b-1)=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 11,
+            "phase": "계산",
+            "gaze": [
+              "s9"
+            ],
+            "reaction": "양수 근이 있으려면 $1-b$가 양수여야 해. $0$은 여기서 세지 말자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s10",
+                "text": "$b<1\\text{일 때 양수 근 }\\sqrt{1-b}\\text{가 하나 존재한다.}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 12,
+            "phase": "계산",
+            "gaze": [
+              "s7"
+            ],
+            "reaction": "$x<0$이면 절댓값은 $-x$야. 부호를 바꿔 쓰자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s11",
+                "text": "$x^3+bx=-x\\quad\\Rightarrow\\quad x(x^2+b+1)=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 13,
+            "phase": "계산",
+            "gaze": [
+              "s11"
+            ],
+            "reaction": "음수 근은 $b<-1$일 때 하나 생기네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s12",
+                "text": "$b<-1\\text{일 때 음수 근 }-\\sqrt{-1-b}\\text{가 하나 존재한다.}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 14,
+            "phase": "검산",
+            "gaze": [
+              "s8",
+              "s10",
+              "s12"
+            ],
+            "reaction": "$b<-1$이면 원점과 양수 근, 음수 근을 모두 갖게 돼. 실근이 세 개라 탈락이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s13",
+                "text": "$b<-1:\\quad\\text{서로 다른 실근 }3\\text{개}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 15,
+            "phase": "검산",
+            "gaze": [
+              "s8",
+              "s10",
+              "s12"
+            ],
+            "reaction": "$b\\ge1$이면 양수와 음수 근이 모두 없어서 원점만 남아.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s14",
+                "text": "$b\\ge1:\\quad\\text{서로 다른 실근 }1\\text{개}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 16,
+            "phase": "계산",
+            "gaze": [
+              "s13",
+              "s14"
+            ],
+            "reaction": "정확히 두 개가 되려면 가운데 범위여야 하네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s15",
+                "text": "$-1\\le b<1$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 17,
+            "phase": "계산",
+            "gaze": [
+              "s10",
+              "s15"
+            ],
+            "reaction": "$0$이 아닌 근은 항상 양수고, 제곱은 $1-b$야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s16",
+                "text": "$k=\\sqrt{1-b},\\quad 0<1-b\\le2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 18,
+            "phase": "계산",
+            "gaze": [
+              "s16"
+            ],
+            "reaction": "양의 제곱근을 취하면 원하는 범위가 나와.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d2",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s17",
+                "text": "$0<k\\le\\sqrt2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 19,
+            "phase": "검산",
+            "gaze": [
+              "s15",
+              "s17"
+            ],
+            "reaction": "$b=-1$은 음수 근이 원점과 겹쳐도 서로 다른 근은 여전히 둘이야. 그래서 위끝 등호를 포함해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s18",
+                "text": "$b=-1:\\quad f(x)=x^3-x,\\quad f(x)=|x|\\text{의 근은 }0,\\sqrt2$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 20,
+            "phase": "검산",
+            "gaze": [
+              "s15"
+            ],
+            "reaction": "반면 $b=1$은 원점만 남으니 제외해야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s19",
+                "text": "$b=1:\\quad f(x)=|x|\\text{의 실근은 }0\\text{뿐이다.}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 21,
+            "phase": "답안 작성",
+            "gaze": [
+              "s3",
+              "s4",
+              "s5",
+              "s6"
+            ],
+            "reaction": "첫 답안에는 대칭 조건으로 이차항을 없앤 근거를 쓰자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a1",
+                "text": "(2-1) $f(x)=x^3+ax^2+bx+c$라 하면 대칭 조건에서 $a=0$이다. 따라서 $f(x)=x^3+bx+c$이고, 홀함수의 대칭구간 적분은 $0$이므로 $\\int_{-1}^{1}f(x)\\,dx=2c$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s3",
+                  "s4",
+                  "s5",
+                  "s6"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 22,
+            "phase": "답안 작성",
+            "gaze": [
+              "s7",
+              "s9",
+              "s10",
+              "s11",
+              "s12"
+            ],
+            "reaction": "둘째 답안은 양·음 구간을 나누어 생기는 근을 설명하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a2",
+                "text": "(2-2) $c=0$이면 $f(x)=x^3+bx$이다. $0$은 항상 근이고, 양의 근은 $b<1$일 때 $\\sqrt{1-b}$, 음의 근은 $b<-1$일 때 $-\\sqrt{-1-b}$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s7",
+                  "s9",
+                  "s10",
+                  "s11",
+                  "s12"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 23,
+            "phase": "답안 작성",
+            "gaze": [
+              "s15",
+              "s16",
+              "s17"
+            ],
+            "reaction": "실근 개수 조건과 끝점 포함 여부를 결론에 연결하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a3",
+                "text": "서로 다른 실근이 정확히 두 개이려면 $-1\\le b<1$이어야 한다. 따라서 $0$이 아닌 실근은 $k=\\sqrt{1-b}$이고 그 범위는 $0<k\\le\\sqrt2$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s15",
+                  "s16",
+                  "s17"
+                ]
+              }
+            ]
+          }
+        ],
+        "questionOrder": 201,
+        "paperId": "sj-2025-b",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "B형",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
+      },
+      {
+        "id": "aj-2025-pm-1-q11-13",
+        "school": "아주대",
+        "year": "2025학년도 오후",
+        "title": "문항 1 · 1-1 (1), (3)",
+        "passages": [
+          {
+            "label": "제시문",
+            "text": "[[g:p1|$-1\\le x<1$에서 $F(x)=|x|$이고 모든 실수 $x$에서 $F(x+2)=F(x)$]]이다. 두 연속함수 $f,g$가 원점에서 만나고, 서로 다른 양의 교점의 $x$좌표가 $\\alpha<\\beta$일 때 [[g:p2|$(0,\\alpha)$에서는 $f>g$, $(\\alpha,\\beta)$에서는 $f<g$]]라 하자. 두 구간에서 그래프 사이 넓이를 각각 $r_1,r_2$라 한다."
+          }
+        ],
+        "problems": [
+          {
+            "num": "1-1 (1)",
+            "text": "[[g:q1|$y=F(x)^2$와 $y=x-c$의 교점이 정확히 $2$개가 되도록 하는 $c$]]를 모두 구하시오. 단, $0\\le c<2$이다."
+          },
+          {
+            "num": "1-1 (3)",
+            "text": "[[g:q2|$f(x)=x(x-\\frac12)^2$, $g(x)=p^2x$이고 $0<p<\\frac14$]]일 때 [[g:q3|$r_1=r_2$가 되도록 하는 $p$]]를 구하시오."
+          }
+        ],
+        "steps": [
+          {
+            "sourceStep": 1,
+            "phase": "읽기",
+            "gaze": [
+              "p1",
+              "q1"
+            ],
+            "reaction": "주기함수지만 값은 항상 $0$과 $1$ 사이야. 교점이 있을 수 있는 $x$부터 좁히자.",
+            "designOps": [
+              {
+                "type": "add",
+                "id": "d1",
+                "kind": "목표",
+                "text": "교점이 두 개인 $c$의 값",
+                "checkable": true,
+                "checked": false
+              },
+              {
+                "type": "add",
+                "id": "d2",
+                "kind": "목표",
+                "text": "넓이가 같은 $p$의 값",
+                "checkable": true,
+                "checked": false
+              }
+            ],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 2,
+            "phase": "설계",
+            "gaze": [
+              "p1",
+              "q1"
+            ],
+            "reaction": "교점에서는 $F(x)^2=x-c$이므로 오른쪽도 $0$ 이상 $1$ 이하여야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s1",
+                "text": "$0\\le x-c\\le1\\quad\\Rightarrow\\quad c\\le x\\le c+1<3$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 3,
+            "phase": "계산",
+            "gaze": [
+              "p1",
+              "s1"
+            ],
+            "reaction": "필요한 범위에서만 주기함수를 식으로 쓰면 두 조각이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s2",
+                "text": "$F(x)^2=\\begin{cases}x^2&(0\\le x\\le1),\\\\(x-2)^2&(1\\le x<3).\\end{cases}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 4,
+            "phase": "검산",
+            "gaze": [
+              "s2",
+              "q1"
+            ],
+            "reaction": "먼저 $c=0$을 따로 보자. $x^2=x$에서 $0,1$이 나오고 다른 교점은 없어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s3",
+                "text": "$c=0:\\quad x=0,1\\text{에서 만나므로 교점 }2\\text{개}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 5,
+            "phase": "설계",
+            "gaze": [
+              "s2"
+            ],
+            "reaction": "이제 $0<c<2$일 때를 보자. 첫 구간의 식을 완전제곱으로 정리하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s4",
+                "text": "$x^2=x-c\\quad\\Rightarrow\\quad (x-\\frac12)^2=\\frac14-c$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 6,
+            "phase": "계산",
+            "gaze": [
+              "s4"
+            ],
+            "reaction": "$c$가 $\\frac14$보다 작으면 첫 구간에 두 교점이 생겨.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s5",
+                "text": "$0<c<\\frac14:\\quad x=\\frac12\\pm\\sqrt{\\frac14-c}\\in(0,1)$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 7,
+            "phase": "계산",
+            "gaze": [
+              "s4"
+            ],
+            "reaction": "$c=\\frac14$에서는 겹친 한 점이고, 그보다 크면 첫 구간에는 없어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s6",
+                "text": "$c=\\frac14:\\;1\\text{개},\\qquad \\frac14<c<2:\\;0\\text{개}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 8,
+            "phase": "계산",
+            "gaze": [
+              "s2"
+            ],
+            "reaction": "두 번째 구간의 방정식도 따로 풀자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s7",
+                "text": "$(x-2)^2=x-c\\quad\\Rightarrow\\quad x^2-5x+4+c=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 9,
+            "phase": "계산",
+            "gaze": [
+              "s7"
+            ],
+            "reaction": "두 근 중 작은 근은 $1$과 $2$ 사이, 큰 근은 $3$보다 커서 필요한 범위 밖이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s8",
+                "text": "$x=\\frac{5\\pm\\sqrt{9-4c}}2,\\quad0<c<2\\text{에서 작은 근만 }(1,3)\\text{에 속한다.}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 10,
+            "phase": "계산",
+            "gaze": [
+              "s5",
+              "s6",
+              "s8"
+            ],
+            "reaction": "두 구간의 개수를 더하면 $c=\\frac14$일 때만 합이 둘이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s9",
+                "text": "$0<c<\\frac14:\\;3\\text{개},\\quad c=\\frac14:\\;2\\text{개},\\quad \\frac14<c<2:\\;1\\text{개}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 11,
+            "phase": "계산",
+            "gaze": [
+              "s3",
+              "s9"
+            ],
+            "reaction": "처음 따로 확인한 $c=0$도 포함해서 마무리하자.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d1",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s10",
+                "text": "$c=0\\text{ 또는 }c=\\frac14$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 12,
+            "phase": "읽기",
+            "gaze": [
+              "q2",
+              "q3"
+            ],
+            "reaction": "다음은 서로 다른 두 함수 사이의 넓이야. 두 식의 차를 인수분해하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s11",
+                "text": "$d(x)=f(x)-g(x)=x\\{(x-\\frac12)^2-p^2\\}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 13,
+            "phase": "계산",
+            "gaze": [
+              "s11"
+            ],
+            "reaction": "제곱의 차라 양의 두 교점이 바로 보이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s12",
+                "text": "$\\alpha=\\frac12-p,\\quad\\beta=\\frac12+p$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 14,
+            "phase": "검산",
+            "gaze": [
+              "s12",
+              "q2"
+            ],
+            "reaction": "$0<p<\\frac14$이니 두 점 모두 양수야. 차의 부호도 주어진 조건과 맞아.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s13",
+                "text": "$0<\\alpha<\\beta,\\quad d(x)=x(x-\\alpha)(x-\\beta)$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 15,
+            "phase": "설계",
+            "gaze": [
+              "p2",
+              "s13"
+            ],
+            "reaction": "첫 구간은 $d$, 다음 구간은 $-d$를 적분해야 넓이가 돼.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s14",
+                "text": "$r_1=\\int_0^\\alpha d(x)\\,dx,\\quad r_2=-\\int_\\alpha^\\beta d(x)\\,dx$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 16,
+            "phase": "계산",
+            "gaze": [
+              "s14",
+              "q3"
+            ],
+            "reaction": "두 넓이가 같다는 건 부호를 포함한 전체 적분이 $0$이라는 뜻이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s15",
+                "text": "$r_1=r_2\\quad\\Rightarrow\\quad\\int_0^\\beta d(x)\\,dx=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 17,
+            "phase": "계산",
+            "gaze": [
+              "s11"
+            ],
+            "reaction": "항별 적분을 위해 차를 전개하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s16",
+                "text": "$d(x)=x^3-x^2+(\\frac14-p^2)x$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 18,
+            "phase": "계산",
+            "gaze": [
+              "s15",
+              "s16"
+            ],
+            "reaction": "위끝 $\\beta$를 넣으면 이 식이 나와.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s17",
+                "text": "$\\frac{\\beta^4}4-\\frac{\\beta^3}3+\\frac{(\\frac14-p^2)\\beta^2}2=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 19,
+            "phase": "계산",
+            "gaze": [
+              "s12",
+              "s17"
+            ],
+            "reaction": "$\\frac14-p^2=\\alpha\\beta$로 바꾸고 $\\beta^3$을 묶으면 간단해져.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s18",
+                "text": "$\\frac{\\beta^3}{12}(3\\beta-4+6\\alpha)=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 20,
+            "phase": "계산",
+            "gaze": [
+              "s12",
+              "s18"
+            ],
+            "reaction": "$\\beta>0$이니 괄호만 $0$이면 돼. $p$로 정리하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s19",
+                "text": "$3(\\frac12+p)-4+6(\\frac12-p)=\\frac12-3p=0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 21,
+            "phase": "계산",
+            "gaze": [
+              "s19"
+            ],
+            "reaction": "따라서 $p=\\frac16$이고 허용범위 안에 있네.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d2",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s20",
+                "text": "$p=\\frac16\\in(0,\\frac14)$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 22,
+            "phase": "검산",
+            "gaze": [
+              "s12",
+              "s20"
+            ],
+            "reaction": "이 값을 넣으면 교점이 $\\frac13,\\frac23$이 돼. 양쪽 넓이도 직접 확인할 수 있어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s21",
+                "text": "$\\alpha=\\frac13,\\quad\\beta=\\frac23,\\quad r_1=r_2=\\frac1{324}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 23,
+            "phase": "답안 작성",
+            "gaze": [
+              "s1",
+              "s2",
+              "s3"
+            ],
+            "reaction": "첫 답안은 조사 범위를 제한한 근거를 남기자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a1",
+                "text": "1-1 (1) $0\\le F(x)^2\\le1$이므로 교점의 $x$좌표는 $c\\le x\\le c+1<3$이다. $c=0$일 때 교점은 $x=0,1$에서 생겨 두 개이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s1",
+                  "s2",
+                  "s3"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 24,
+            "phase": "답안 작성",
+            "gaze": [
+              "s4",
+              "s5",
+              "s6",
+              "s8",
+              "s9",
+              "s10"
+            ],
+            "reaction": "나머지 $c$에서는 두 구간의 교점 수를 합쳐 결론을 내자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a2",
+                "text": "$0<c<2$에서 $(1,3)$에는 항상 교점이 하나 있다. $(0,1)$의 교점 수는 $c<\\frac14$, $c=\\frac14$, $c>\\frac14$에 따라 각각 $2,1,0$이다. 따라서 구하는 값은 $c=0,\\frac14$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s4",
+                  "s5",
+                  "s6",
+                  "s8",
+                  "s9",
+                  "s10"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 25,
+            "phase": "답안 작성",
+            "gaze": [
+              "s12",
+              "s14",
+              "s15"
+            ],
+            "reaction": "다음 답안에는 넓이와 부호 있는 적분을 구분해 쓰자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a3",
+                "text": "1-1 (3) 두 양의 교점의 $x$좌표는 $\\alpha=\\frac12-p$, $\\beta=\\frac12+p$이다. $d=f-g$라 하면 $r_1=r_2$에서 $\\int_0^\\beta d(x)\\,dx=0$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s12",
+                  "s14",
+                  "s15"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 26,
+            "phase": "답안 작성",
+            "gaze": [
+              "s17",
+              "s18",
+              "s19",
+              "s20"
+            ],
+            "reaction": "적분식을 인수분해하고 허용범위까지 확인하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a4",
+                "text": "이를 계산하면 $\\frac{\\beta^3}{12}(3\\beta-4+6\\alpha)=0$이다. $\\beta>0$이므로 $\\frac12-3p=0$, 즉 $p=\\frac16$이다. 이 값은 $0<p<\\frac14$를 만족한다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s17",
+                  "s18",
+                  "s19",
+                  "s20"
+                ]
+              }
+            ]
+          }
+        ],
+        "questionOrder": 101,
+        "paperId": "aj-2025-pm",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오후",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
+      },
+      {
+        "id": "ih-2025-pm-3-q123",
+        "school": "인하대",
+        "year": "2025학년도 오후",
+        "title": "문항 3 · 소문항 (3-1)~(3-3)",
+        "passages": [
+          {
+            "label": "제시문",
+            "text": "[[g:p1|$a>1$, $b,c>0$이고 양의 실수 전체에서 연속인 함수 $f$]]가 [[g:p2|$f(x)=\\begin{cases}\\log_a x&(0<x<2),\\\\ b^x&(2\\le x<4),\\\\ \\log_c x&(x\\ge4)\\end{cases}$]]로 정의된다. 로그의 밑 $c$는 $1$이 아니다."
+          }
+        ],
+        "problems": [
+          {
+            "num": "(3-1)",
+            "text": "[[g:q1|$\\frac{(\\log a)^2}{\\log c}$]]의 값을 구하시오."
+          },
+          {
+            "num": "(3-2)",
+            "text": "[[g:q2|$f(x)=\\frac12$의 양의 실근이 $3$개가 되도록 하는 $a$의 범위]]를 구하시오."
+          },
+          {
+            "num": "(3-3)",
+            "text": "[[g:q3|$f(f(\\beta))=f(8)$이고 $f(\\beta)\\ne8$인 $\\beta>1$이 존재하도록 하는 $a$의 범위]]를 구하시오."
+          }
+        ],
+        "steps": [
+          {
+            "sourceStep": 1,
+            "phase": "읽기",
+            "gaze": [
+              "p1",
+              "p2"
+            ],
+            "reaction": "접합점 $2,4$에서 연속이라는 조건이 핵심이네. 우선 함수값을 하나의 문자로 묶자.",
+            "designOps": [
+              {
+                "type": "add",
+                "id": "d1",
+                "kind": "목표",
+                "text": "(3-1)의 로그 관계 계산",
+                "checkable": true,
+                "checked": false
+              },
+              {
+                "type": "add",
+                "id": "d2",
+                "kind": "목표",
+                "text": "(3-2)의 세 교점 조건",
+                "checkable": true,
+                "checked": false
+              },
+              {
+                "type": "add",
+                "id": "d3",
+                "kind": "목표",
+                "text": "(3-3)의 합성함수 조건",
+                "checkable": true,
+                "checked": false
+              }
+            ],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 2,
+            "phase": "설계",
+            "gaze": [
+              "p2"
+            ],
+            "reaction": "$u=\\log_a2$라 두면 $a>1$이라 $u>0$이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s1",
+                "text": "$u=\\log_a2=\\frac{\\log2}{\\log a}>0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 3,
+            "phase": "계산",
+            "gaze": [
+              "p1",
+              "p2",
+              "s1"
+            ],
+            "reaction": "$x=2$에서 연속이므로 $b^2=u$야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s2",
+                "text": "$b^2=u$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 4,
+            "phase": "계산",
+            "gaze": [
+              "p1",
+              "p2",
+              "s2"
+            ],
+            "reaction": "$x=4$에서는 $b^4$와 로그 값이 같아야 해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s3",
+                "text": "$\\log_c4=b^4=u^2>0$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 5,
+            "phase": "계산",
+            "gaze": [
+              "s3"
+            ],
+            "reaction": "$4>1$인데 로그가 양수이므로 $c>1$이네. 마지막 구간도 증가해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s4",
+                "text": "$c>1$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 6,
+            "phase": "계산",
+            "gaze": [
+              "s1",
+              "s3"
+            ],
+            "reaction": "밑변환 공식으로 $\\log c$를 정리하자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s5",
+                "text": "$\\frac{2\\log2}{\\log c}=\\frac{(\\log2)^2}{(\\log a)^2}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 7,
+            "phase": "계산",
+            "gaze": [
+              "s5"
+            ],
+            "reaction": "양수인 $\\log2$로 정리하면 구하는 비가 나와.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d1",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s6",
+                "text": "$\\frac{(\\log a)^2}{\\log c}=\\frac12\\log2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 8,
+            "phase": "읽기",
+            "gaze": [
+              "q2",
+              "s1",
+              "s3"
+            ],
+            "reaction": "수평선과 세 번 만나려면 세 조각에서 하나씩 만나야 해. 접합점은 중복해서 세면 안 되지.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 9,
+            "phase": "설계",
+            "gaze": [
+              "s1",
+              "s2"
+            ],
+            "reaction": "가운데 조각이 감소하려면 $b<1$이어야 해. 곧 $u<1$이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s7",
+                "text": "$0<b<1\\quad\\Leftrightarrow\\quad0<u<1$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 10,
+            "phase": "설계",
+            "gaze": [
+              "p2",
+              "s1",
+              "s3"
+            ],
+            "reaction": "가운데가 $u$에서 $u^2$로 내려갈 때, 높이 $\\frac12$가 그 두 값 사이에 있어야 하네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s8",
+                "text": "$u>\\frac12>u^2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 11,
+            "phase": "검산",
+            "gaze": [
+              "s8"
+            ],
+            "reaction": "등호가 생기면 교점 하나가 $x=2$ 또는 $4$에 걸쳐서 중복돼. 서로 다른 세 점이려면 엄격한 부등호야.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 12,
+            "phase": "계산",
+            "gaze": [
+              "s8"
+            ],
+            "reaction": "$u>0$이니 제곱근을 취해서 범위를 합치자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s9",
+                "text": "$\\frac12<u<\\frac1{\\sqrt2}$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 13,
+            "phase": "계산",
+            "gaze": [
+              "s1",
+              "s9"
+            ],
+            "reaction": "양수의 역수를 취하면 부등호가 바뀌어. 밑 $2$의 로그로 옮기자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s10",
+                "text": "$\\sqrt2<\\frac1u=\\log_2a<2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 14,
+            "phase": "계산",
+            "gaze": [
+              "s10"
+            ],
+            "reaction": "밑 $2>1$이니 지수로 바꾸어도 부등호 방향은 같아.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d2",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s11",
+                "text": "$2^{\\sqrt2}<a<4$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 15,
+            "phase": "검산",
+            "gaze": [
+              "s11"
+            ],
+            "reaction": "예를 들어 $a=3$이면 $u\\approx0.631$이고 $u^2\\approx0.398$이야. $\\frac12$가 정확히 사이에 놓이네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s12",
+                "text": "$a=3:\\quad u>\\frac12>u^2$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 16,
+            "phase": "읽기",
+            "gaze": [
+              "q3"
+            ],
+            "reaction": "이번에는 $f(x)=f(8)$이 $x=8$ 외의 해를 갖는지부터 살펴보자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 17,
+            "phase": "계산",
+            "gaze": [
+              "s3"
+            ],
+            "reaction": "$\\log_c8$은 $\\log_c4$의 $\\frac32$배네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s13",
+                "text": "$f(8)=\\log_c8=\\frac32u^2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 18,
+            "phase": "설계",
+            "gaze": [
+              "s13",
+              "q3"
+            ],
+            "reaction": "다른 해를 $k$라 두면 $f(\\beta)=k$인 $\\beta$를 찾는 문제로 이어져.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s14",
+                "text": "$f(k)=f(8),\\quad k\\ne8$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 19,
+            "phase": "검산",
+            "gaze": [
+              "s1",
+              "s2",
+              "s3"
+            ],
+            "reaction": "$u\\ge1$이면 앞뒤 로그 구간은 증가하고 가운데도 감소하지 않아. $f(8)=\\frac32u^2$는 중간 높이보다 커서 해는 $8$ 하나야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s15",
+                "text": "$u\\ge1\\text{에서는 }f(x)=f(8)\\text{의 해가 }8\\text{뿐이다.}$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 20,
+            "phase": "설계",
+            "gaze": [
+              "s7",
+              "s13"
+            ],
+            "reaction": "따라서 $0<u<1$을 보자. 수평선의 높이는 항상 $u^2$보다 높아. 다른 해가 있으려면 꼭대기 높이 $u$ 이하여야 하네.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s16",
+                "text": "$\\frac32u^2\\le u$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 21,
+            "phase": "계산",
+            "gaze": [
+              "s16"
+            ],
+            "reaction": "$u>0$으로 나누면 $u\\le\\frac23$이야.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s17",
+                "text": "$0<u\\le\\frac23$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 22,
+            "phase": "계산",
+            "gaze": [
+              "s1",
+              "s17"
+            ],
+            "reaction": "밑변환을 다시 써서 $a$의 범위로 바꾸자.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s18",
+                "text": "$\\log_2a\\ge\\frac32\\quad\\Rightarrow\\quad a\\ge2^{3/2}=2\\sqrt2$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 23,
+            "phase": "검산",
+            "gaze": [
+              "s13",
+              "s17"
+            ],
+            "reaction": "이 범위에서 왼쪽 로그 구간의 해를 구하면 $1$보다 크고 $2$ 이하인 $k$가 실제로 있어.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s19",
+                "text": "$k=a^{f(8)}=2^{3u/2}\\in(1,2]$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 24,
+            "phase": "설계",
+            "gaze": [
+              "s3",
+              "s4",
+              "s19"
+            ],
+            "reaction": "이제 $f(\\beta)=k$를 만들자. 오른쪽 로그는 $u^2$부터 무한대로 증가하고 $k>u^2$니까 가능해.",
+            "designOps": [],
+            "scratchAdd": [
+              {
+                "id": "s20",
+                "text": "$\\beta=c^k>4,\\quad f(\\beta)=k$",
+                "tag": "계산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 25,
+            "phase": "검산",
+            "gaze": [
+              "s14",
+              "s19",
+              "s20"
+            ],
+            "reaction": "$k\\le2$라 $8$과 다르고, $\\beta>4$라 요구한 $\\beta>1$도 만족해. 합성함수 조건까지 확인됐어.",
+            "designOps": [
+              {
+                "type": "check",
+                "id": "d3",
+                "checked": true
+              }
+            ],
+            "scratchAdd": [
+              {
+                "id": "s21",
+                "text": "$f(f(\\beta))=f(k)=f(8),\\quad f(\\beta)=k\\ne8$",
+                "tag": "검산"
+              }
+            ],
+            "answerAdd": []
+          },
+          {
+            "sourceStep": 26,
+            "phase": "답안 작성",
+            "gaze": [
+              "s1",
+              "s2",
+              "s3",
+              "s5",
+              "s6"
+            ],
+            "reaction": "첫 답안에는 접합점에서의 두 연속 조건을 적자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a1",
+                "text": "(3-1) $u=\\log_a2$라 하면 연속성에서 $b^2=u$, $\\log_c4=b^4=u^2$이다. 밑변환 공식으로 $\\frac{2\\log2}{\\log c}=\\frac{(\\log2)^2}{(\\log a)^2}$이므로 구하는 값은 $\\frac12\\log2$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s1",
+                  "s2",
+                  "s3",
+                  "s5",
+                  "s6"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 27,
+            "phase": "답안 작성",
+            "gaze": [
+              "s7",
+              "s8",
+              "s9",
+              "s10",
+              "s11"
+            ],
+            "reaction": "둘째 답안은 서로 다른 세 교점이라 끝값을 제외한다는 근거를 남기자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a2",
+                "text": "(3-2) 세 구간에서 서로 다른 교점이 하나씩 생기려면 $u>\\frac12>u^2$이어야 한다. 따라서 $\\frac12<u<\\frac1{\\sqrt2}$이고, 밑변환을 하면 $2^{\\sqrt2}<a<4$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s7",
+                  "s8",
+                  "s9",
+                  "s10",
+                  "s11"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 28,
+            "phase": "답안 작성",
+            "gaze": [
+              "s13",
+              "s15",
+              "s16",
+              "s17",
+              "s18"
+            ],
+            "reaction": "셋째 답안에는 다른 해가 존재하기 위한 필요조건부터 쓰자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a3",
+                "text": "(3-3) $f(8)=\\frac32u^2$이다. $u\\ge1$이면 $f(x)=f(8)$의 해는 $8$뿐이다. $0<u<1$에서 다른 해가 존재하려면 $\\frac32u^2\\le u$, 즉 $u\\le\\frac23$이어야 하므로 $a\\ge2\\sqrt2$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s13",
+                  "s15",
+                  "s16",
+                  "s17",
+                  "s18"
+                ]
+              }
+            ]
+          },
+          {
+            "sourceStep": 29,
+            "phase": "답안 작성",
+            "gaze": [
+              "s19",
+              "s20",
+              "s21"
+            ],
+            "reaction": "존재 문제라 충분조건도 빠뜨리지 말고 실제 $\\beta$를 제시하자.",
+            "designOps": [],
+            "scratchAdd": [],
+            "answerAdd": [
+              {
+                "id": "a4",
+                "text": "역으로 $0<u\\le\\frac23$이면 $k=2^{3u/2}\\in(1,2]$가 $f(k)=f(8)$을 만족한다. $\\beta=c^k>4$로 두면 $f(\\beta)=k\\ne8$이고 $f(f(\\beta))=f(8)$이다. 따라서 구하는 범위는 $a\\ge2\\sqrt2$이다.",
+                "editType": "보완",
+                "fromScratch": [
+                  "s19",
+                  "s20",
+                  "s21"
+                ]
+              }
+            ]
+          }
+        ],
+        "questionOrder": 301,
+        "paperId": "ih-2025-pm",
+        "academicYear": 2025,
+        "examKind": "past",
+        "session": "오후",
+        "contentNote": "공식 문항의 표시된 소문항만 발췌·재구성한 리플레이입니다."
       }
     ];
 
@@ -10505,7 +13566,7 @@
         });
         return { phase: text(st.phase, "phase", "진행"), gaze, reaction: checkText(text(st.reaction, "reaction", "")), designOps, scratchAdd, answerAdd };
       });
-      return { id: caseId, title, school: text(obj.school, "school", "추가 기출") || "추가 기출", year: text(obj.year, "year", "사용자") || "사용자", passages, problems, steps };
+      return { id: caseId, title, school: text(obj.school, "school", "추가 기출") || "추가 기출", year: text(obj.year, "year", "사용자") || "사용자", ...(obj.session === undefined ? {} : { session: text(obj.session, "session") }), ...(Number.isInteger(obj.academicYear) && obj.academicYear >= 2000 && obj.academicYear <= 2100 ? { academicYear: obj.academicYear } : {}), ...(obj.examKind === "mock" || obj.examKind === "past" ? { examKind: obj.examKind } : {}), passages, problems, steps };
     }
 
     function loadCustomCases() {
@@ -10684,31 +13745,77 @@
     const SCHOOL_ORDER = ["튜토리얼", "광운대", "세종대", "아주대", "인하대"];
     function getYearNum(y) {
       const m = String(y || "").match(/20\d{2}/);
-      return m ? parseInt(m[0], 10) : 9999;
+      return m ? parseInt(m[0], 10) : 0;
+    }
+    function getAcademicYear(c) {
+      return Number.isInteger(c.academicYear) ? c.academicYear : getYearNum(c.year);
+    }
+    function isMockCase(c) { return c.examKind === "mock" || String(c.year || "").includes("모의"); }
+    function getSessionLabel(c) {
+      if (c.school === "튜토리얼") return "예시";
+      if (c.session) return c.session;
+      if (isMockCase(c)) return "모의논술";
+      const y = String(c.year || "").replace(/20\d{2}(?:학년도)?\s*/, "").trim();
+      const match = y.match(/\d+교시|오전|오후|[AB]형/i);
+      return match ? match[0].toUpperCase() : "회차 미지정";
+    }
+    function getSessionOrder(c) {
+      if (isMockCase(c)) return 0;
+      const label = getSessionLabel(c);
+      const period = label.match(/(\d+)교시/);
+      if (period) return Number(period[1]) * 10;
+      if (label.includes("오전") || label === "A형") return 10;
+      if (label.includes("오후") || label === "B형") return 20;
+      return 90;
     }
     function getYearGroupLabel(c) {
       if (c.school === "튜토리얼") return "입문 예시";
-      const y = String(c.year || "");
-      const m = y.match(/(20\d{2})/);
-      if (!m) return y || "기타";
-      return y.includes("모의") ? m[1] + " 모의논술" : m[1] + "학년도 기출";
+      const year = getAcademicYear(c);
+      if (!year) return "사용자 추가 문항";
+      const publicationYear = getOfficialPaper(c)?.publicationYear;
+      return isMockCase(c) ? `${year}학년도 모의논술${publicationYear ? " · " + publicationYear + "년 공개" : ""}` : `${year}학년도 기출`;
+    }
+    function getPaperLabel(c) {
+      if (c.school === "튜토리얼") return "입문 예시";
+      const session = getSessionLabel(c);
+      const year = getAcademicYear(c);
+      const type = isMockCase(c) ? "모의논술" : "기출";
+      return `${year ? year + "학년도 " : ""}${type}${isMockCase(c) ? "" : " · " + session}`;
     }
     function getSessionShort(c) {
-      const y = String(c.year || "").replace(/20\d{2}\s*/, "").trim();
-      if (!y || y === "모의" || y === "예시") return "";
-      return "[" + y + "] ";
+      return c.school === "튜토리얼" ? "" : `[${getSessionLabel(c)}] `;
+    }
+    function getNeutralCaseTitle(c) {
+      const builtin = BASE_REPLAY_CASES.find(item => item.id === c.id);
+      if (builtin) return builtin.title;
+      // 사용자 문항도 선택 전에는 풀이·정답이 담길 수 있는 title을 보여 주지 않는다.
+      const nums = Array.from(new Set((c.problems || []).map(pr => String(pr.num || "").match(/\d+(?:-\d+)?/)?.[0]).filter(Boolean)));
+      if (nums.length) return `문항 ${nums.join(", ")}`;
+      const n = REPLAY_CASES.filter(item => !BASE_REPLAY_CASES.some(base => base.id === item.id)).findIndex(item => item.id === c.id) + 1;
+      return `추가 문항 ${Math.max(1, n)}`;
+    }
+    function getQuestionOrder(c) {
+      if (Number.isInteger(c.questionOrder)) return c.questionOrder;
+      const nums = String(c.problems?.[0]?.num || "").match(/\d+/g) || [];
+      return (Number(nums[0]) || 999) * 100 + (Number(nums[1]) || 0);
+    }
+    function getOfficialPaper(c) { return SOURCE_PAPERS.find(paper => paper.id === c.paperId); }
+    function renderSourceLinks(c) {
+      const paper = getOfficialPaper(c);
+      if (!paper) return "";
+      return paper.links.map(link => `<a class="underline underline-offset-2 hover:text-zinc-950" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)} ↗</a>`).join('<span aria-hidden="true"> · </span>');
     }
     function sortReplayCases(list) {
       return list.slice().sort((a, b) => {
-        const sa = SCHOOL_ORDER.indexOf(a.school);
-        const sb = SCHOOL_ORDER.indexOf(b.school);
-        const ia = sa === -1 ? 99 : sa;
-        const ib = sb === -1 ? 99 : sb;
-        if (ia !== ib) return ia - ib;
-        const ya = getYearNum(a.year);
-        const yb = getYearNum(b.year);
-        if (ya !== yb) return yb - ya;
-        return String(a.year).localeCompare(String(b.year), "ko");
+        const schoolIndex = c => { const n = SCHOOL_ORDER.indexOf(c.school); return n < 0 ? 99 : n; };
+        return schoolIndex(a) - schoolIndex(b)
+          || (schoolIndex(a) === 99 ? a.school.localeCompare(b.school, "ko") : 0)
+          || getAcademicYear(b) - getAcademicYear(a)
+          || Number(isMockCase(b)) - Number(isMockCase(a))
+          || getSessionOrder(a) - getSessionOrder(b)
+          || getSessionLabel(a).localeCompare(getSessionLabel(b), "ko", { numeric: true })
+          || getQuestionOrder(a) - getQuestionOrder(b)
+          || a.id.localeCompare(b.id, "en", { numeric: true });
       });
     }
 
@@ -10750,9 +13857,7 @@
 
       const groups = new Map();
       listToShow.forEach(c => {
-        const key = headerSchoolFilter === "__ALL__"
-          ? (c.school === "튜토리얼" ? "튜토리얼" : (c.school + " · " + getYearGroupLabel(c)))
-          : getYearGroupLabel(c);
+        const key = (headerSchoolFilter === "__ALL__" ? c.school + " · " : "") + getPaperLabel(c);
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(c);
       });
@@ -10760,7 +13865,7 @@
       sel.innerHTML = Array.from(groups.entries()).map(([grpLabel, list]) =>
         `<optgroup label="${escapeHtml(grpLabel)}">${list.map(c => {
           const doneMark = (state.completedCases && state.completedCases[c.id]) ? "✓ " : "";
-          return `<option value="${escapeHtml(c.id)}" ${c.id === state.caseId ? "selected" : ""}>${doneMark}${escapeHtml(getSessionShort(c) + stripMathForOption(c.title))}</option>`;
+          return `<option value="${escapeHtml(c.id)}" ${c.id === state.caseId ? "selected" : ""}>${doneMark}${escapeHtml((c.school === "튜토리얼" ? "" : getPaperLabel(c) + " · ") + getNeutralCaseTitle(c))}</option>`;
         }).join("")}</optgroup>`
       ).join("");
       renderCatalogInMenu();
@@ -10775,45 +13880,41 @@
       tabs.innerHTML = schools.map(s =>
         `<button type="button" data-cat-school="${escapeHtml(s)}" class="cat-school-tab text-[11px] font-bold px-2 py-1 rounded border transition ${catalogSchoolFilter === s ? "bg-zinc-900 text-white border-zinc-900" : "bg-white text-zinc-600 border-zinc-300 hover:border-zinc-900"}">${escapeHtml(s)}</button>`
       ).join("");
-
-      const filtered = catalogSchoolFilter === "전체"
-        ? REPLAY_CASES
-        : REPLAY_CASES.filter(c => c.school === catalogSchoolFilter);
-
+      const filtered = sortReplayCases(catalogSchoolFilter === "전체" ? REPLAY_CASES : REPLAY_CASES.filter(c => c.school === catalogSchoolFilter));
       const bySchool = new Map();
       filtered.forEach(c => {
         if (!bySchool.has(c.school)) bySchool.set(c.school, new Map());
-        const yrMap = bySchool.get(c.school);
-        const yrKey = getYearGroupLabel(c);
-        if (!yrMap.has(yrKey)) yrMap.set(yrKey, []);
-        yrMap.get(yrKey).push(c);
+        const years = bySchool.get(c.school), yearKey = getYearGroupLabel(c);
+        if (!years.has(yearKey)) years.set(yearKey, new Map());
+        const sessions = years.get(yearKey), sessionKey = getSessionLabel(c);
+        if (!sessions.has(sessionKey)) sessions.set(sessionKey, []);
+        sessions.get(sessionKey).push(c);
       });
-
-      wrap.innerHTML = Array.from(bySchool.entries()).map(([schoolName, yrMap]) => {
-        const st = getCaseCompletionStats(schoolName);
-        const yearBlocks = Array.from(yrMap.entries()).map(([yrLabel, list]) => `
-          <div class="space-y-1">
-            <div class="text-[10px] font-bold text-zinc-400 tracking-wide pl-0.5">${escapeHtml(yrLabel)}</div>
-            <div class="space-y-1">
-              ${list.map(c => {
-                const cur = c.id === state.caseId;
-                const done = state.completedCases && state.completedCases[c.id];
-                const bmCount = (state.bookmarks && state.bookmarks[c.id]) ? state.bookmarks[c.id].length : 0;
-                return `<button type="button" data-pick-case="${escapeHtml(c.id)}" class="cat-pick-btn w-full text-left text-xs px-2.5 py-1.5 rounded-md border transition flex items-center justify-between gap-2 ${cur ? "border-zinc-900 bg-zinc-900 text-white font-bold" : "border-zinc-200 bg-white text-zinc-800 hover:border-zinc-900"}">
-                  <span class="truncate">${done ? "✓ " : ""}${escapeHtml(getSessionShort(c) + stripMathForOption(c.title))}</span>
-                  <span class="text-[10px] shrink-0 ${cur ? "text-zinc-300" : "text-zinc-400"}">${bmCount > 0 ? "★" + bmCount + " " : ""}${c.steps.length}단계</span>
-                </button>`;
-              }).join("")}
-            </div>
-          </div>
-        `).join("");
-
+      wrap.innerHTML = Array.from(bySchool.entries()).map(([schoolName, years]) => {
+        const stats = getCaseCompletionStats(schoolName);
+        const yearBlocks = Array.from(years.entries()).map(([yearLabel, sessions]) => `
+          <div class="space-y-2">
+            <div class="text-[11px] font-bold text-zinc-700">${escapeHtml(yearLabel)}</div>
+            ${Array.from(sessions.entries()).map(([sessionLabel, list]) => `
+              <div class="space-y-1.5 border-l-2 border-zinc-200 pl-2">
+                ${schoolName === "튜토리얼" ? "" : `<div class="text-[11px] font-bold text-zinc-600">${escapeHtml(sessionLabel)} · 자연계열</div>`}
+                ${getOfficialPaper(list[0]) ? `<div class="flex flex-wrap gap-x-1 gap-y-1 text-[10px] text-zinc-500">${renderSourceLinks(list[0])}</div>` : ""}
+                ${list.map(c => {
+                  const cur = c.id === state.caseId;
+                  const done = state.completedCases[c.id];
+                  const bmCount = (state.bookmarks[c.id] || []).length;
+                  return `<button type="button" data-pick-case="${escapeHtml(c.id)}" class="cat-pick-btn w-full text-left text-xs px-2.5 py-1.5 rounded-md border transition flex items-center justify-between gap-2 ${cur ? "border-zinc-900 bg-zinc-900 text-white font-bold" : "border-zinc-200 bg-white text-zinc-800 hover:border-zinc-900"}">
+                    <span class="min-w-0 break-words">${done ? "✓ " : ""}${escapeHtml(getNeutralCaseTitle(c))}</span>
+                    <span class="text-[10px] shrink-0 ${cur ? "text-zinc-300" : "text-zinc-400"}">${bmCount > 0 ? "★" + bmCount + " " : ""}${c.steps.length}단계</span>
+                  </button>`;
+                }).join("")}
+              </div>`).join("")}
+          </div>`).join("");
         return `<div class="rounded-lg border border-zinc-200 bg-zinc-50/60 p-2.5 space-y-2">
           <div class="flex items-center justify-between border-b border-zinc-200 pb-1.5">
             <span class="text-xs font-extrabold text-zinc-900">${escapeHtml(schoolName)}</span>
-            <span class="text-[10px] font-semibold text-zinc-500">${st.done}/${st.total} 완료</span>
-          </div>
-          ${yearBlocks}
+            <span class="text-[10px] font-semibold text-zinc-500">${stats.done}/${stats.total} 리플레이 완료</span>
+          </div>${yearBlocks}
         </div>`;
       }).join("");
     }
@@ -10955,7 +14056,8 @@
       if (state.visiblePanels.has("problem")) {
         panelHtml.problem = `
           <section class="${boxCls("problem")} p-4 space-y-2.5">
-            <div class="flex items-center justify-between"><span class="text-xs font-bold text-zinc-400">문제</span><span class="text-[11px] text-zinc-400">${escapeHtml(curCase.school)} · ${escapeHtml(curCase.year)}</span></div>
+            <div class="flex flex-wrap items-center justify-between gap-1.5"><span class="text-xs font-bold text-zinc-400">문제</span><span class="text-[11px] text-zinc-500">${escapeHtml(curCase.school)} · ${escapeHtml(getPaperLabel(curCase))}</span></div>
+            ${getOfficialPaper(curCase) ? `<div class="flex flex-wrap gap-x-1 gap-y-1 text-[11px] text-zinc-500">${renderSourceLinks(curCase)}</div><p class="text-[10px] text-zinc-400">${escapeHtml(curCase.contentNote || "표시된 소문항의 리플레이입니다.")}</p>` : ""}
             <div class="space-y-3">${curCase.problems.map(pr => `
               <div class="grid grid-cols-[auto_1fr] gap-x-2.5 items-start">
                 <span class="text-xs font-extrabold text-zinc-900 pt-1.5">${escapeHtml(pr.num)}</span>
@@ -11341,7 +14443,7 @@
         "reaction은 '~하네', '~하자' 같은 구어체 속생각, answerAdd.text는 채점관에게 제출하는 정식 문어체로 써 줘.",
         "답안은 짧은 문단으로 나누고 fromScratch에 앞서 쓴 연습지 ID를 연결해 줘. gaze는 제시문·문제의 [[g:ID|구절]] 또는 앞 단계의 설계·연습지 ID를 참조해 줘.",
         "설계 항목의 ID와 연습지·답안 ID는 문항 안에서 중복 없이 써 줘. checkable인 항목은 실제 해결한 뒤 check 작업으로 완료해 줘. 정의하지 않은 [[c:ID|개념]]은 쓰지 마.",
-        "수식은 $...$ 또는 $$...$$로 감싸고 JSON 안의 TeX 백슬래시는 이중으로 이스케이프해 줘. title은 수식 구분자 없이 평문으로 써 줘.",
+        "수식은 $...$ 또는 $$...$$로 감싸고 JSON 안의 TeX 백슬래시는 이중으로 이스케이프해 줘. title은 문항 1 · 소문항 (1-1)처럼 번호만 써서 풀이법이나 정답을 노출하지 마. year에는 학년도, session에는 오전·오후·1교시·2교시 또는 공식 A형·B형을 정확히 써 줘.",
         "아래 3단계는 필드 구조 예시야. 실제 풀이의 단계 수와 내용은 문제에 맞춰 충분히 늘려 줘.",
         JSON.stringify({ id: "custom-1", school: "광운대", year: "2026", title: "문항 제목", passages: [{ label: "제시문", text: "... [[g:p1|조건]] ..." }], problems: [{ num: "[1]", text: "... [[g:q1|구할 것]] ..." }], steps: [
           { phase: "읽기", gaze: ["p1", "q1"], reaction: "먼저 조건과 구할 것을 구분하자.", designOps: [{ type: "add", id: "d1", kind: "목표", text: "문제의 목표", checkable: true, checked: false }], scratchAdd: [], answerAdd: [] },
