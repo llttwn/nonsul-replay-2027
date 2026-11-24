@@ -164,6 +164,8 @@
       border-color: #27272a;
       color: #e4e4e7;
     }
+    body.dark-mode .panel-toggle-btn[aria-pressed="true"] { background-color: #f4f4f5 !important; color: #18181b !important; }
+    body.dark-mode .panel-toggle-btn[aria-pressed="false"]:hover { background-color: #27272a !important; color: #f4f4f5 !important; }
     body.dark-mode .panel-box.panel-active {
       border-color: #e4e4e7;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
@@ -321,8 +323,8 @@
         <select id="caseSelect" aria-label="기출 문항 선택" class="text-xs sm:text-[13px] font-semibold px-2.5 py-1.5 rounded-md border border-zinc-300 bg-white text-zinc-900 min-w-0 flex-1 max-w-[340px] truncate focus:outline-none focus:border-zinc-900"></select>
       </div>
 
-      <!-- 중: 5개 칸 표시 토글 (충분한 폭 xl 이상에서만 한 줄 노출) -->
-      <div id="panelToggles" class="hidden xl:flex items-center gap-1 shrink-0"></div>
+      <!-- 중: 8개 칸 표시 토글 (충분한 폭 2xl 이상에서만 한 줄 노출) -->
+      <div id="panelToggles" class="hidden 2xl:flex items-center gap-1 shrink-0"></div>
 
       <!-- 우: 타이머 + 현재 소문항만 + 예측 모드 + 북마크 + 야간 모드 + 메뉴 -->
       <div class="flex items-center gap-1.5 shrink-0 ml-auto sm:ml-0">
@@ -335,8 +337,8 @@
         <button id="settingsBtn" type="button" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-zinc-300 bg-white text-zinc-700 hover:border-zinc-900 transition">메뉴</button>
       </div>
     </div>
-    <!-- 태블릿·모바일·좁은 창 전용 5개 칸 토글 1줄 -->
-    <div id="mobilePanelToggles" class="xl:hidden px-4 pb-2 flex items-center gap-1 overflow-x-auto"></div>
+    <!-- 태블릿·모바일·좁은 창 전용 8개 칸 토글 1줄 -->
+    <div id="mobilePanelToggles" class="2xl:hidden px-4 pb-2 flex items-center gap-1 overflow-x-auto"></div>
   </header>
 
   <div id="learningWelcome">
@@ -451,7 +453,7 @@
           <div><kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">Space</kbd> 자동 재생/정지</div>
           <div><kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">P</kbd> 예측 연습 · <kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">S</kbd> 소문항 집중</div>
           <div><kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">B</kbd> 북마크 · <kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">D</kbd> 야간 모드 · <kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">L</kbd> 기초 학습</div>
-          <div><kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">0</kbd>/<kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">End</kbd> 처음·끝 · <kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">1~5</kbd> 칸 토글</div>
+          <div><kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">0</kbd>/<kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">End</kbd> 처음·끝 · <kbd class="px-1 py-0.5 rounded border border-zinc-300 font-mono text-[10px]">1~8</kbd> 칸 토글</div>
         </div>
       </div>
 
@@ -62385,19 +62387,19 @@
     ],
     "items": [],
     "officialSourceCandidates": [],
-    "officialSourceStatus": "자체 제작 예시로 공식 기출 자료 대상과 구분합니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "자체 제작 예시로 공식 기출 자료 대조 대상과 구분합니다.",
+    "checkedOn": "2026-11-24",
+    "method": "자체 제작 예시 내부 논증 점검 완료 (공식 기출 대조 대상 제외)",
     "school": "튜토리얼",
     "year": "예시",
     "session": "예시",
     "mainQuestion": 0,
     "paperId": null,
-    "status": "no-obvious-gap"
+    "status": "example-checked"
   },
   "kw-2027-mock-1": {
     "caseId": "kw-2027-mock-1",
-    "summary": "빠른검토에서뚜렷한누락없음(공식대조미완료)",
+    "summary": "공식 자료 대조 완료(광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 1] 해설 및 모범답안, 1–6). 전 소문항 정답이 공식 모범답안과 일치하며, [3]의 채점 기준(4점)에 맞춰 일반 $b\\ne 0$에 대한 치환적분 결과 $\\frac{e^b-1}{2b}$와 $b=0$ 배제 근거를 답안에 보완했습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62426,19 +62428,22 @@
         "url": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 1] 해설 및 모범답안, 1–6).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "광운대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 1,
     "paperId": "kw-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 1] 해설 및 모범답안",
+    "resolvedPages": "1–6",
+    "resolvedSourceUrl": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=749"
   },
   "sj-2027-mock-1": {
     "caseId": "sj-2027-mock-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 1, 4–5, 12–13). 2027 모의논술 공식 모범답안(p.4–5)과 채점기준표(p.12–13)의 모든 배점 항목(점 P·Q 좌표, 접선의 길이·도함수·극한, 치환적분 부피 $2t^3$)을 빠짐없이 충족해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62454,19 +62459,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 1, 4–5, 12–13).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 1,
     "paperId": "sj-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표",
+    "resolvedPages": "1, 4–5, 12–13",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
   },
   "sj-2027-mock-3": {
     "caseId": "sj-2027-mock-3",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 3, 8–11, 17–19). 정답과 핵심 논리는 공식 채점기준(p.17–19)과 일치하며, (3-2)에서 경계값 $a=-\\frac{\\sqrt{6}}{2}$(중근 $D=0$)일 때도 한 점에서만 $f'(x)=0$이므로 증가하고 $a<-\\frac{\\sqrt{6}}{2}$이면 감소 구간이 존재한다는 서술을 보완했습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62482,19 +62490,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 3, 8–11, 17–19).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 3,
     "paperId": "sj-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표",
+    "resolvedPages": "3, 8–11, 17–19",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
   },
   "sj-2026-b-2": {
     "caseId": "sj-2026-b-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 2번, 92–100 (보고서 쪽수 89–97)). 2026 선행학습 보고서 문항카드9(PDF p.92–100)와 대조한 결과, (2-1) 채점기준의 '+20점: $a=1$일 때 조건을 만족시키는 이유 설명'이 빠져 있어 구체적 존재 예시를 `u0_a2`에 보완했습니다. (2-2), (2-3)은 공식 기준과 완전히 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62510,19 +62521,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 2번, 92–100 (보고서 쪽수 89–97)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2026학년도 B형",
     "session": "B형",
     "mainQuestion": 2,
     "paperId": "sj-2026-b",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 2번",
+    "resolvedPages": "92–100 (보고서 쪽수 89–97)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=92"
   },
   "sj-2025-a-1": {
     "caseId": "sj-2025-a-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–11 (문항1: 6, 7–8, 9–11)). 2025 자연 A형 공식 채점기준(p.7–8)과 예시답안(p.9–11)의 모든 배점 항목(극대 부호 변화, 치환적분·이계도함수, 대칭성 $h(a-x)=a-h(x)$ 및 산술·기하 등호 성립 조건)을 충족해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62538,19 +62552,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–11 (문항1: 6, 7–8, 9–11)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2025학년도 A형",
     "session": "A형",
     "mainQuestion": 1,
     "paperId": "sj-2025-a",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형",
+    "resolvedPages": "6–11 (문항1: 6, 7–8, 9–11)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
   },
   "aj-2026-pm-1": {
     "caseId": "aj-2026-pm-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(아주대학교 2026학년도 자연계열(오후) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안·채점기준 1–3). 공식 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 기하 관찰, 급수·극한 계산과 정답이 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62569,19 +62586,22 @@
         "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4590"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2026학년도 자연계열(오후) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안·채점기준 1–3).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "아주대",
     "year": "2026학년도 오후",
     "session": "오후",
     "mainQuestion": 1,
     "paperId": "aj-2026-pm",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "아주대학교 2026학년도 자연계열(오후) 논술고사 문제지·모범답안·채점기준",
+    "resolvedPages": "문제지 1–2, 모범답안·채점기준 1–3",
+    "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4590"
   },
   "aj-2025-am-1": {
     "caseId": "aj-2025-am-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안 1, 채점기준 1). 공식 입학처 PDF(file_no=4441) 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 치환적분, 극한 관찰 및 정답이 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62602,19 +62622,22 @@
         "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안 1, 채점기준 1).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "아주대",
     "year": "2025학년도 오전",
     "session": "오전",
     "mainQuestion": 1,
     "paperId": "aj-2025-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준",
+    "resolvedPages": "문제지 1–2, 모범답안 1, 채점기준 1",
+    "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
   },
   "ih-2026-pm-2": {
     "caseId": "ih-2026-pm-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2026학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 4–7). 2026 오후 자연 일반 2번 공식 자료와 1:1 대조 결과, (2-1) 직선·넓이식, (2-2) 변 BC 길이 √2, (2-3) 닮음 넓이 차 및 d^2=-1+√17과 증감 판정이 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62634,19 +62657,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=3"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2026학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 4–7).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2026학년도 오후",
     "session": "오후",
     "mainQuestion": 2,
     "paperId": "ih-2026-pm",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2026학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+    "resolvedPages": "4–7",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=3"
   },
   "ih-2025-am-3-q12": {
     "caseId": "ih-2025-am-3-q12",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 10–13). 2025 오전 자연 3번 공식 자료와 1:1 대조 결과, (3-1)·(3-2)(a),(c)는 유지하고 (3-2)(b)에 곡선 y=g(x) 개형(모든 실수 x에서 g(x)>0, x축 위쪽) 서술(5점)을 보완했습니다.",
     "checkedAnswerIds": [
       "a1",
       "a_detail_1",
@@ -62666,19 +62692,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 10–13).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2025학년도 오전",
     "session": "오전",
     "mainQuestion": 3,
     "paperId": "ih-2025-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+    "resolvedPages": "10–13",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
   },
   "sj-2026-a-1-q123": {
     "caseId": "sj-2026-a-1-q123",
-    "summary": "2026학년도 세종대 자연계열 A형 공식 문제지(p.2)를 확인해 (1-1) a1 첫 문장에 역함수 기호 $F(x)=f^{-1}(x)$ 정의를 추가했습니다. 현재 공개된 공식 PDF에는 문제지만 수록되어 있고 예시답안·채점기준은 미포함 상태이므로, 공식 해설 대조 완료 판정은 보류합니다.",
+    "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 1번, 73–76 (보고서 쪽수 70–73)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드5(PDF p.73–76)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 정답이 완전히 일치해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "a1",
       "a2",
@@ -62693,19 +62722,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 1번, 73–76 (보고서 쪽수 70–73)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2026학년도 A형",
     "session": "A형",
     "mainQuestion": 1,
     "paperId": "sj-2026-a",
-    "status": "clear"
+    "status": "resolved",
+    "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 1번",
+    "resolvedPages": "73–76 (보고서 쪽수 70–73)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=73"
   },
   "ih-2025-pm-3-q123": {
     "caseId": "ih-2025-pm-3-q123",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 8–10). 2025 오후 자연 3번 공식 자료와 1:1 대조 결과, (3-1) (1/2)log 2, (3-2) 2^√2<a<4, (3-3) a≥2√2 및 β>1 존재성 구성까지 감점 요소 없이 완전히 일치합니다.",
     "checkedAnswerIds": [
       "a1",
       "a2",
@@ -62723,19 +62755,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 8–10).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2025학년도 오후",
     "session": "오후",
     "mainQuestion": 3,
     "paperId": "ih-2025-pm",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+    "resolvedPages": "8–10",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
   },
   "kw-2027-mock-2": {
     "caseId": "kw-2027-mock-2",
-    "summary": "빠른검토에서뚜렷한누락없음(공식대조미완료)",
+    "summary": "공식 자료 대조 완료(광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 2] 해설 및 모범답안, 1–7). 전 소문항 정답과 풀이 과정(도형 닮음·접선 수직 조건 포함)이 공식 채점 기준(p.4) 및 예시 답안(p.5–7)과 완전히 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62758,19 +62793,22 @@
         "url": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 2] 해설 및 모범답안, 1–7).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "광운대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 2,
     "paperId": "kw-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 2] 해설 및 모범답안",
+    "resolvedPages": "1–7",
+    "resolvedSourceUrl": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
   },
   "aj-2025-am-2": {
     "caseId": "aj-2025-am-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안 2–3, 채점기준 2). 공식 입학처 PDF(file_no=4441) 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 좌표·접선·미분 개형 분석과 정답이 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62790,19 +62828,22 @@
         "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안 2–3, 채점기준 2).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "아주대",
     "year": "2025학년도 오전",
     "session": "오전",
     "mainQuestion": 2,
     "paperId": "aj-2025-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준",
+    "resolvedPages": "문제지 3–4, 모범답안 2–3, 채점기준 2",
+    "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
   },
   "aj-2027-mock-1": {
     "caseId": "aj-2027-mock-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(아주대학교 2027학년도 자연계열 모의논술 문제지·수정사항·채점기준(수정본), 문제지_수정본 1–2, 채점기준_수정본 1–5). 공식 문제지·수정사항·채점기준과 1:1 대조해 7개 소문항 정답을 모두 확인하고, [1-1](3)에 공식 채점기준(3점)인 a_n의 증가성 논증을 보완했습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62826,19 +62867,22 @@
         "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4622"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2027학년도 자연계열 모의논술 문제지·수정사항·채점기준(수정본), 문제지_수정본 1–2, 채점기준_수정본 1–5).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "아주대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 1,
     "paperId": "aj-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "아주대학교 2027학년도 자연계열 모의논술 문제지·수정사항·채점기준(수정본)",
+    "resolvedPages": "문제지_수정본 1–2, 채점기준_수정본 1–5",
+    "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4622"
   },
   "aj-2026-am-2": {
     "caseId": "aj-2026-am-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(아주대학교 2026학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안·채점기준 4–6). 공식 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 관찰 근거, 구간별 최솟값, 극한 차수 비교와 정답이 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62858,19 +62902,22 @@
         "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4589"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2026학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안·채점기준 4–6).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "아주대",
     "year": "2026학년도 오전",
     "session": "오전",
     "mainQuestion": 2,
     "paperId": "aj-2026-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "아주대학교 2026학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준",
+    "resolvedPages": "문제지 3–4, 모범답안·채점기준 4–6",
+    "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4589"
   },
   "ih-2025-am-1": {
     "caseId": "ih-2025-am-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4). 2025 오전 자연 1번 공식 자료를 신규 내려받아 1:1 대조한 결과, (1-1) 9/2, (1-2) (2/5)e^π+1/5, (1-3) 부분적분 및 부등식 증명이 모두 감점 없이 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62890,19 +62937,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2025학년도 오전",
     "session": "오전",
     "mainQuestion": 1,
     "paperId": "ih-2025-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+    "resolvedPages": "1–4",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
   },
   "ih-2025-am-2": {
     "caseId": "ih-2025-am-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–9). 2025 오전 자연 2번 공식 자료와 1:1 대조 결과, 정답과 (2-2) 풀이는 유지하고 (2-1)(b)에 세 인수의 부호 변화 근거를 명시해 과정 생략 감점 여지를 없앴습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62923,19 +62973,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–9).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2025학년도 오전",
     "session": "오전",
     "mainQuestion": 2,
     "paperId": "ih-2025-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+    "resolvedPages": "5–9",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
   },
   "ih-2025-pm-1": {
     "caseId": "ih-2025-pm-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 1–4). 2025 오후 자연 1번 공식 자료를 신규 내려받아 1:1 대조한 결과, (1-1) 3구간 넓이식, (1-2) 구간별 미분·부호 및 극값, (1-3) 극솟값과 양 끝점 비교 및 최대·최소가 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62959,19 +63012,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 1–4).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2025학년도 오후",
     "session": "오후",
     "mainQuestion": 1,
     "paperId": "ih-2025-pm",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+    "resolvedPages": "1–4",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
   },
   "ih-2025-pm-2": {
     "caseId": "ih-2025-pm-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 5–7). 2025 오후 자연 2번 공식 자료와 1:1 대조 결과, (2-1) b=(4/3)a^(1/4), (2-2) 접선과 정점 (0, 2/3), (2-3) 윗·아랫도형 넓이 1/(9√a) 및 1:1 비 일정성이 모두 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -62993,19 +63049,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 5–7).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2025학년도 오후",
     "session": "오후",
     "mainQuestion": 2,
     "paperId": "ih-2025-pm",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+    "resolvedPages": "5–7",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
   },
   "ih-2027-mock-1": {
     "caseId": "ih-2027-mock-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 1–3). 2027 모의논술 자연 일반 1번 공식 문제지·해설·채점기준과 1:1 대조 결과, (1-1) 접선·x절편·S(t) 및 (1-2) 치환 후 증감 판정과 최솟값 8/9가 감점 요소 없이 완전히 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63027,19 +63086,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=7"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 1–3).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 1,
     "paperId": "ih-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정)",
+    "resolvedPages": "1–3",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=6"
   },
   "ih-2027-mock-2": {
     "caseId": "ih-2027-mock-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 4–7). 2027 모의논술 자연 일반 2번 공식 자료와 1:1 대조 결과, (2-1) 두 부등식(등호 포함), (2-2) 급수·정적분 및 조임정리, (2-3) 극한값 e^(2/π)가 모두 감점 없이 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63063,19 +63125,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=7"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 4–7).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 2,
     "paperId": "ih-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정)",
+    "resolvedPages": "4–7",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=6"
   },
   "ih-2026-am-1": {
     "caseId": "ih-2026-am-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4). 2026 오전 자연 1번 공식 자료와 1:1 대조 결과, (1-1)·(1-2) 모두 산술-기하 부등식과 절댓값 처리, 등호 조건 함수 유일성 및 정답(√2/2, 1/(√2 e), 8)이 일치합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63093,19 +63158,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2026학년도 오전",
     "session": "오전",
     "mainQuestion": 1,
     "paperId": "ih-2026-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+    "resolvedPages": "1–4",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
   },
   "ih-2026-am-2": {
     "caseId": "ih-2026-am-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+    "summary": "공식 자료 대조 완료(인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–8). 정답과 (2-3) 극한 풀이는 유지하고, 공식 채점기준에 따라 (2-1)에서 g(x)의 x=0 불연속·기타 점 연속 근거와 (2-2)에서 g(x)의 x=-1,0,1 미분불가능 근거(5점)를 보완했습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63125,19 +63193,22 @@
         "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–8).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "인하대",
     "year": "2026학년도 오전",
     "session": "오전",
     "mainQuestion": 2,
     "paperId": "ih-2026-am",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+    "resolvedPages": "5–8",
+    "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
   },
   "kw-2025-1-2": {
     "caseId": "kw-2025-1-2",
-    "summary": "빠른검토에서뚜렷한누락없음(공식대조미완료)",
+    "summary": "공식 자료 대조 완료(광운대학교 2026학년도 논술우수자전형 가이드북 · 2025학년도 기출 (자연계열 1교시 2번), 29–37). 전 소문항 정답은 공식 예시 답안과 일치하며, 채점 기준(p.32)과 총평(p.36–37) 지적에 따라 [3]의 $f^n, g^n$ 귀납 단계·교점 풀이 근거와 [4]-(2)의 구간별 후보 해 배제 과정을 보완했습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63157,19 +63228,22 @@
         "url": "https://iphak.kw.ac.kr/upload_data/mojib/20250605091213_13.pdf#page=17"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (광운대학교 2026학년도 논술우수자전형 가이드북 · 2025학년도 기출 (자연계열 1교시 2번), 29–37).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "광운대",
     "year": "2025학년도 1교시",
     "session": "1교시",
     "mainQuestion": 2,
     "paperId": "kw-2025-1",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "광운대학교 2026학년도 논술우수자전형 가이드북 · 2025학년도 기출 (자연계열 1교시 2번)",
+    "resolvedPages": "29–37",
+    "resolvedSourceUrl": "https://iphak.kw.ac.kr/upload_data/mojib/20250605091213_13.pdf#page=29"
   },
   "sj-2025-a-2": {
     "caseId": "sj-2025-a-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–12 (문항2: 6–7, 8–9, 11–12)). 2025 자연 A형 공식 채점기준(p.8–9)과 예시답안(p.11–12)의 모든 배점 항목($S(t)$ 공식, 등비급수 수렴·합, 평균값 정리를 이용한 $g(t)$ 상수함수 증명과 초기값 적분)을 충족해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63186,19 +63260,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–12 (문항2: 6–7, 8–9, 11–12)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2025학년도 A형",
     "session": "A형",
     "mainQuestion": 2,
     "paperId": "sj-2025-a",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형",
+    "resolvedPages": "6–12 (문항2: 6–7, 8–9, 11–12)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
   },
   "sj-2025-b-3": {
     "caseId": "sj-2025-b-3",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 B형, 15–21 (문항3: 15–16, 17, 20–21)). 2025 자연 B형 공식 채점기준(p.17)과 예시답안(p.20–21)의 모든 배점 항목($F(-x)$ 치환, $x\\le 0$과 $x>0$ 구간별 $g'(x)$ 부호 판정, 대칭 치환적분 $\\frac{C^2}{6}$)을 충족해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63216,19 +63293,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=15"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 B형, 15–21 (문항3: 15–16, 17, 20–21)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2025학년도 B형",
     "session": "B형",
     "mainQuestion": 3,
     "paperId": "sj-2025-b",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 B형",
+    "resolvedPages": "15–21 (문항3: 15–16, 17, 20–21)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=15"
   },
   "sj-2027-mock-2": {
     "caseId": "sj-2027-mock-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 2, 6–7, 14–16). 2027 모의논술 공식 모범답안(p.6–7)과 채점기준표(p.14–16)의 핵심 항목($f'(x)>0$, 역함수 이계도함수 부호 판정, $x=\\frac{1}{2}$ 유일 극대·최대 증명)을 모두 충족해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63244,19 +63324,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 2, 6–7, 14–16).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2027학년도 모의논술",
     "session": "모의논술",
     "mainQuestion": 2,
     "paperId": "sj-2027-mock",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표",
+    "resolvedPages": "2, 6–7, 14–16",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
   },
   "sj-2026-a-2": {
     "caseId": "sj-2026-a-2",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 2번, 77–81 (보고서 쪽수 74–78)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드6(PDF p.77–81)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 구간별 교점 개수가 완전히 일치해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63272,19 +63355,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 2번, 77–81 (보고서 쪽수 74–78)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2026학년도 A형",
     "session": "A형",
     "mainQuestion": 2,
     "paperId": "sj-2026-a",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 2번",
+    "resolvedPages": "77–81 (보고서 쪽수 74–78)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=77"
   },
   "sj-2026-a-3": {
     "caseId": "sj-2026-a-3",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 3번, 82–86 (보고서 쪽수 79–83)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드7(PDF p.82–86)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 정답이 완전히 일치해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63300,19 +63386,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 3번, 82–86 (보고서 쪽수 79–83)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2026학년도 A형",
     "session": "A형",
     "mainQuestion": 3,
     "paperId": "sj-2026-a",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 3번",
+    "resolvedPages": "82–86 (보고서 쪽수 79–83)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=82"
   },
   "sj-2026-b-1": {
     "caseId": "sj-2026-b-1",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 1번, 87–91 (보고서 쪽수 84–88)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드8(PDF p.87–91)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 정답이 완전히 일치해 기존 답안을 유지합니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63328,19 +63417,22 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 1번, 87–91 (보고서 쪽수 84–88)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2026학년도 B형",
     "session": "B형",
     "mainQuestion": 1,
     "paperId": "sj-2026-b",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 1번",
+    "resolvedPages": "87–91 (보고서 쪽수 84–88)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=87"
   },
   "sj-2026-b-3": {
     "caseId": "sj-2026-b-3",
-    "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+    "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 3번, 101–104 (보고서 쪽수 98–101)). 2026 선행학습 보고서 문항카드10(PDF p.101–104)과 대조한 결과, (3-3)에서 정의역 밖 $I_{102}$ 대신 공식 채점기준(+10점)에 맞춰 $I_{101}$($a_{101}$)을 직접 계산하고 (3-2)에서 증명한 범위 $1\\le n\\le 100$ 점화식만 적용하도록 `u2_a2`를 보완했습니다.",
     "checkedAnswerIds": [
       "u0_a1",
       "u0_a2",
@@ -63356,24 +63448,28 @@
         "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
       }
     ],
-    "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-    "checkedOn": "2026-11-23",
-    "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+    "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 3번, 101–104 (보고서 쪽수 98–101)).",
+    "checkedOn": "2026-11-24",
+    "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
     "school": "세종대",
     "year": "2026학년도 B형",
     "session": "B형",
     "mainQuestion": 3,
     "paperId": "sj-2026-b",
-    "status": "no-obvious-gap"
+    "status": "resolved",
+    "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 3번",
+    "resolvedPages": "101–104 (보고서 쪽수 98–101)",
+    "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=101"
   }
 };
     const ANSWER_QUICK_AUDIT_BUNDLE = {
   "version": 1,
-  "checkedOn": "2026-11-23",
-  "method": "후속 확인 대상 16문항(21건) 공식 PDF 대조 완료: 15문항 공식 해설·채점기준 대조 및 보완 완료, 1문항(세종대 2026 A형 1번)은 공식 문제지 기준 보완 후 공식 해설 공개 대기.",
+  "checkedOn": "2026-11-24",
+  "method": "전체 70개 기출·모의 대문항 공식 PDF 대조 완료(reviewed 69건, 원문 조건 주의 1건: kw-2026-2-2) 및 튜토리얼 1건 내부 논증 점검 완료. 기존 빠른 점검 32건을 ANSWER_REVIEW_LOG 기준으로 모두 해소·동기화 완료.",
   "summary": {
     "checkedCases": 32,
     "checkedAnswers": 232,
+    "resolvedCases": 32,
     "followUpCases": 0,
     "items": 0,
     "byPriority": {
@@ -63383,25 +63479,56 @@
     }
   },
   "alreadyOfficiallyReviewedCases": [
-    "kw-2026-1-1",
-    "kw-2026-1-2",
+    "kw-2027-mock-1",
     "kw-2026-2-1",
-    "kw-2026-2-2",
+    "kw-2025-1-1",
+    "kw-2025-2-2",
+    "sj-2027-mock-1",
+    "sj-2027-mock-3",
+    "sj-2026-b-2",
+    "sj-2025-a-1",
     "aj-2027-mock-2",
     "aj-2026-am-1",
-    "aj-2026-pm-2",
-    "aj-2025-pm-1",
-    "aj-2025-pm-2",
+    "aj-2026-pm-1",
+    "aj-2025-am-1",
     "ih-2027-mock-3",
     "ih-2026-am-3",
+    "ih-2026-pm-2",
+    "ih-2025-am-3-q12",
+    "kw-2026-1-1",
+    "sj-2026-a-1-q123",
+    "sj-2025-b-2",
+    "aj-2025-pm-1",
+    "ih-2025-pm-3-q123",
+    "kw-2027-mock-2",
+    "aj-2025-am-2",
+    "aj-2025-pm-2",
+    "aj-2027-mock-1",
+    "aj-2026-am-2",
+    "aj-2026-pm-2",
+    "ih-2025-am-1",
+    "ih-2025-am-2",
+    "ih-2025-pm-1",
+    "ih-2025-pm-2",
+    "ih-2027-mock-1",
+    "ih-2027-mock-2",
+    "ih-2026-am-1",
+    "ih-2026-am-2",
     "ih-2026-pm-1",
     "ih-2026-pm-3",
-    "kw-2025-1-1",
+    "kw-2025-1-2",
     "kw-2025-2-1",
-    "kw-2025-2-2",
+    "kw-2026-1-2",
+    "kw-2026-2-2",
+    "sj-2025-a-2",
     "sj-2025-a-3",
     "sj-2025-b-1",
-    "sj-2025-b-2",
+    "sj-2025-b-3",
+    "sj-2027-mock-2",
+    "sj-2026-a-2",
+    "sj-2026-a-3",
+    "sj-2026-b-1",
+    "sj-2026-b-3",
     "aj-2024-am-1",
     "aj-2024-am-2",
     "aj-2024-pm-1",
@@ -63434,19 +63561,19 @@
       ],
       "items": [],
       "officialSourceCandidates": [],
-      "officialSourceStatus": "자체 제작 예시로 공식 기출 자료 대상과 구분합니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "자체 제작 예시로 공식 기출 자료 대조 대상과 구분합니다.",
+      "checkedOn": "2026-11-24",
+      "method": "자체 제작 예시 내부 논증 점검 완료 (공식 기출 대조 대상 제외)",
       "school": "튜토리얼",
       "year": "예시",
       "session": "예시",
       "mainQuestion": 0,
       "paperId": null,
-      "status": "no-obvious-gap"
+      "status": "example-checked"
     },
     {
       "caseId": "kw-2027-mock-1",
-      "summary": "빠른검토에서뚜렷한누락없음(공식대조미완료)",
+      "summary": "공식 자료 대조 완료(광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 1] 해설 및 모범답안, 1–6). 전 소문항 정답이 공식 모범답안과 일치하며, [3]의 채점 기준(4점)에 맞춰 일반 $b\\ne 0$에 대한 치환적분 결과 $\\frac{e^b-1}{2b}$와 $b=0$ 배제 근거를 답안에 보완했습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63475,19 +63602,22 @@
           "url": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 1] 해설 및 모범답안, 1–6).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "광운대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 1,
       "paperId": "kw-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 1] 해설 및 모범답안",
+      "resolvedPages": "1–6",
+      "resolvedSourceUrl": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=749"
     },
     {
       "caseId": "sj-2027-mock-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 1, 4–5, 12–13). 2027 모의논술 공식 모범답안(p.4–5)과 채점기준표(p.12–13)의 모든 배점 항목(점 P·Q 좌표, 접선의 길이·도함수·극한, 치환적분 부피 $2t^3$)을 빠짐없이 충족해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63503,19 +63633,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 1, 4–5, 12–13).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 1,
       "paperId": "sj-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표",
+      "resolvedPages": "1, 4–5, 12–13",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
     },
     {
       "caseId": "sj-2027-mock-3",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 3, 8–11, 17–19). 정답과 핵심 논리는 공식 채점기준(p.17–19)과 일치하며, (3-2)에서 경계값 $a=-\\frac{\\sqrt{6}}{2}$(중근 $D=0$)일 때도 한 점에서만 $f'(x)=0$이므로 증가하고 $a<-\\frac{\\sqrt{6}}{2}$이면 감소 구간이 존재한다는 서술을 보완했습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63531,19 +63664,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 3, 8–11, 17–19).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 3,
       "paperId": "sj-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표",
+      "resolvedPages": "3, 8–11, 17–19",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
     },
     {
       "caseId": "sj-2026-b-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 2번, 92–100 (보고서 쪽수 89–97)). 2026 선행학습 보고서 문항카드9(PDF p.92–100)와 대조한 결과, (2-1) 채점기준의 '+20점: $a=1$일 때 조건을 만족시키는 이유 설명'이 빠져 있어 구체적 존재 예시를 `u0_a2`에 보완했습니다. (2-2), (2-3)은 공식 기준과 완전히 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63559,19 +63695,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 2번, 92–100 (보고서 쪽수 89–97)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2026학년도 B형",
       "session": "B형",
       "mainQuestion": 2,
       "paperId": "sj-2026-b",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 2번",
+      "resolvedPages": "92–100 (보고서 쪽수 89–97)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=92"
     },
     {
       "caseId": "sj-2025-a-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–11 (문항1: 6, 7–8, 9–11)). 2025 자연 A형 공식 채점기준(p.7–8)과 예시답안(p.9–11)의 모든 배점 항목(극대 부호 변화, 치환적분·이계도함수, 대칭성 $h(a-x)=a-h(x)$ 및 산술·기하 등호 성립 조건)을 충족해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63587,19 +63726,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–11 (문항1: 6, 7–8, 9–11)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2025학년도 A형",
       "session": "A형",
       "mainQuestion": 1,
       "paperId": "sj-2025-a",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형",
+      "resolvedPages": "6–11 (문항1: 6, 7–8, 9–11)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
     },
     {
       "caseId": "aj-2026-pm-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(아주대학교 2026학년도 자연계열(오후) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안·채점기준 1–3). 공식 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 기하 관찰, 급수·극한 계산과 정답이 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63618,19 +63760,22 @@
           "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4590"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2026학년도 자연계열(오후) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안·채점기준 1–3).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "아주대",
       "year": "2026학년도 오후",
       "session": "오후",
       "mainQuestion": 1,
       "paperId": "aj-2026-pm",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "아주대학교 2026학년도 자연계열(오후) 논술고사 문제지·모범답안·채점기준",
+      "resolvedPages": "문제지 1–2, 모범답안·채점기준 1–3",
+      "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4590"
     },
     {
       "caseId": "aj-2025-am-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안 1, 채점기준 1). 공식 입학처 PDF(file_no=4441) 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 치환적분, 극한 관찰 및 정답이 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63651,19 +63796,22 @@
           "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 1–2, 모범답안 1, 채점기준 1).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "아주대",
       "year": "2025학년도 오전",
       "session": "오전",
       "mainQuestion": 1,
       "paperId": "aj-2025-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준",
+      "resolvedPages": "문제지 1–2, 모범답안 1, 채점기준 1",
+      "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
     },
     {
       "caseId": "ih-2026-pm-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2026학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 4–7). 2026 오후 자연 일반 2번 공식 자료와 1:1 대조 결과, (2-1) 직선·넓이식, (2-2) 변 BC 길이 √2, (2-3) 닮음 넓이 차 및 d^2=-1+√17과 증감 판정이 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63683,19 +63831,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=3"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2026학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 4–7).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2026학년도 오후",
       "session": "오후",
       "mainQuestion": 2,
       "paperId": "ih-2026-pm",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2026학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+      "resolvedPages": "4–7",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=3"
     },
     {
       "caseId": "ih-2025-am-3-q12",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 10–13). 2025 오전 자연 3번 공식 자료와 1:1 대조 결과, (3-1)·(3-2)(a),(c)는 유지하고 (3-2)(b)에 곡선 y=g(x) 개형(모든 실수 x에서 g(x)>0, x축 위쪽) 서술(5점)을 보완했습니다.",
       "checkedAnswerIds": [
         "a1",
         "a_detail_1",
@@ -63715,19 +63866,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 10–13).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2025학년도 오전",
       "session": "오전",
       "mainQuestion": 3,
       "paperId": "ih-2025-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+      "resolvedPages": "10–13",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
     },
     {
       "caseId": "sj-2026-a-1-q123",
-      "summary": "2026학년도 세종대 자연계열 A형 공식 문제지(p.2)를 확인해 (1-1) a1 첫 문장에 역함수 기호 $F(x)=f^{-1}(x)$ 정의를 추가했습니다. 현재 공개된 공식 PDF에는 문제지만 수록되어 있고 예시답안·채점기준은 미포함 상태이므로, 공식 해설 대조 완료 판정은 보류합니다.",
+      "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 1번, 73–76 (보고서 쪽수 70–73)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드5(PDF p.73–76)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 정답이 완전히 일치해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "a1",
         "a2",
@@ -63742,19 +63896,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 1번, 73–76 (보고서 쪽수 70–73)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2026학년도 A형",
       "session": "A형",
       "mainQuestion": 1,
       "paperId": "sj-2026-a",
-      "status": "clear"
+      "status": "resolved",
+      "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 1번",
+      "resolvedPages": "73–76 (보고서 쪽수 70–73)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=73"
     },
     {
       "caseId": "ih-2025-pm-3-q123",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 8–10). 2025 오후 자연 3번 공식 자료와 1:1 대조 결과, (3-1) (1/2)log 2, (3-2) 2^√2<a<4, (3-3) a≥2√2 및 β>1 존재성 구성까지 감점 요소 없이 완전히 일치합니다.",
       "checkedAnswerIds": [
         "a1",
         "a2",
@@ -63772,19 +63929,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 8–10).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2025학년도 오후",
       "session": "오후",
       "mainQuestion": 3,
       "paperId": "ih-2025-pm",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+      "resolvedPages": "8–10",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
     },
     {
       "caseId": "kw-2027-mock-2",
-      "summary": "빠른검토에서뚜렷한누락없음(공식대조미완료)",
+      "summary": "공식 자료 대조 완료(광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 2] 해설 및 모범답안, 1–7). 전 소문항 정답과 풀이 과정(도형 닮음·접선 수직 조건 포함)이 공식 채점 기준(p.4) 및 예시 답안(p.5–7)과 완전히 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63807,19 +63967,22 @@
           "url": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 2] 해설 및 모범답안, 1–7).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "광운대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 2,
       "paperId": "kw-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "광운대학교 2027학년도 논술우수자전형 모의논술 자연계열 [문제 2] 해설 및 모범답안",
+      "resolvedPages": "1–7",
+      "resolvedSourceUrl": "https://iphak.jcoresystem.kr/_common/new_download_file.php?menu=boardfile&file_no=750"
     },
     {
       "caseId": "aj-2025-am-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안 2–3, 채점기준 2). 공식 입학처 PDF(file_no=4441) 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 좌표·접선·미분 개형 분석과 정답이 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63839,19 +64002,22 @@
           "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안 2–3, 채점기준 2).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "아주대",
       "year": "2025학년도 오전",
       "session": "오전",
       "mainQuestion": 2,
       "paperId": "aj-2025-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "아주대학교 2025학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준",
+      "resolvedPages": "문제지 3–4, 모범답안 2–3, 채점기준 2",
+      "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4441"
     },
     {
       "caseId": "aj-2027-mock-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(아주대학교 2027학년도 자연계열 모의논술 문제지·수정사항·채점기준(수정본), 문제지_수정본 1–2, 채점기준_수정본 1–5). 공식 문제지·수정사항·채점기준과 1:1 대조해 7개 소문항 정답을 모두 확인하고, [1-1](3)에 공식 채점기준(3점)인 a_n의 증가성 논증을 보완했습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63875,19 +64041,22 @@
           "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4622"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2027학년도 자연계열 모의논술 문제지·수정사항·채점기준(수정본), 문제지_수정본 1–2, 채점기준_수정본 1–5).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "아주대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 1,
       "paperId": "aj-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "아주대학교 2027학년도 자연계열 모의논술 문제지·수정사항·채점기준(수정본)",
+      "resolvedPages": "문제지_수정본 1–2, 채점기준_수정본 1–5",
+      "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4622"
     },
     {
       "caseId": "aj-2026-am-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). problems·passages와 answerAdd 전체를 읽은 내부 점검이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(아주대학교 2026학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안·채점기준 4–6). 공식 문제지·모범답안·채점기준과 1:1 대조한 결과 5개 소문항의 관찰 근거, 구간별 최솟값, 극한 차수 비교와 정답이 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63907,19 +64076,22 @@
           "url": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4589"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (아주대학교 2026학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준, 문제지 3–4, 모범답안·채점기준 4–6).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "아주대",
       "year": "2026학년도 오전",
       "session": "오전",
       "mainQuestion": 2,
       "paperId": "aj-2026-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "아주대학교 2026학년도 자연계열(오전) 논술고사 문제지·모범답안·채점기준",
+      "resolvedPages": "문제지 3–4, 모범답안·채점기준 4–6",
+      "resolvedSourceUrl": "https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4589"
     },
     {
       "caseId": "ih-2025-am-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4). 2025 오전 자연 1번 공식 자료를 신규 내려받아 1:1 대조한 결과, (1-1) 9/2, (1-2) (2/5)e^π+1/5, (1-3) 부분적분 및 부등식 증명이 모두 감점 없이 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63939,19 +64111,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2025학년도 오전",
       "session": "오전",
       "mainQuestion": 1,
       "paperId": "ih-2025-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+      "resolvedPages": "1–4",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
     },
     {
       "caseId": "ih-2025-am-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–9). 2025 오전 자연 2번 공식 자료와 1:1 대조 결과, 정답과 (2-2) 풀이는 유지하고 (2-1)(b)에 세 인수의 부호 변화 근거를 명시해 과정 생략 감점 여지를 없앴습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -63972,19 +64147,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–9).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2025학년도 오전",
       "session": "오전",
       "mainQuestion": 2,
       "paperId": "ih-2025-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+      "resolvedPages": "5–9",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=4"
     },
     {
       "caseId": "ih-2025-pm-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 1–4). 2025 오후 자연 1번 공식 자료를 신규 내려받아 1:1 대조한 결과, (1-1) 3구간 넓이식, (1-2) 구간별 미분·부호 및 극값, (1-3) 극솟값과 양 끝점 비교 및 최대·최소가 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64008,19 +64186,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 1–4).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2025학년도 오후",
       "session": "오후",
       "mainQuestion": 1,
       "paperId": "ih-2025-pm",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+      "resolvedPages": "1–4",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
     },
     {
       "caseId": "ih-2025-pm-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 5–7). 2025 오후 자연 2번 공식 자료와 1:1 대조 결과, (2-1) b=(4/3)a^(1/4), (2-2) 접선과 정점 (0, 2/3), (2-3) 윗·아랫도형 넓이 1/(9√a) 및 1:1 비 일정성이 모두 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64042,19 +64223,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드, 5–7).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2025학년도 오후",
       "session": "오후",
       "mainQuestion": 2,
       "paperId": "ih-2025-pm",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2025학년도 수시모집 논술고사(자연오후) 문제지 및 문항카드",
+      "resolvedPages": "5–7",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=189&FILE_SEQ=5"
     },
     {
       "caseId": "ih-2027-mock-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 1–3). 2027 모의논술 자연 일반 1번 공식 문제지·해설·채점기준과 1:1 대조 결과, (1-1) 접선·x절편·S(t) 및 (1-2) 치환 후 증감 판정과 최솟값 8/9가 감점 요소 없이 완전히 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64076,19 +64260,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=7"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 1–3).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 1,
       "paperId": "ih-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정)",
+      "resolvedPages": "1–3",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=6"
     },
     {
       "caseId": "ih-2027-mock-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 4–7). 2027 모의논술 자연 일반 2번 공식 자료와 1:1 대조 결과, (2-1) 두 부등식(등호 포함), (2-2) 급수·정적분 및 조임정리, (2-3) 극한값 e^(2/π)가 모두 감점 없이 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64112,19 +64299,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=7"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정), 4–7).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 2,
       "paperId": "ih-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2027학년도 논술 모의고사 자연계열 문제지 및 문항카드(7/28 수정)",
+      "resolvedPages": "4–7",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=210&FILE_SEQ=6"
     },
     {
       "caseId": "ih-2026-am-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4). 2026 오전 자연 1번 공식 자료와 1:1 대조 결과, (1-1)·(1-2) 모두 산술-기하 부등식과 절댓값 처리, 등호 조건 함수 유일성 및 정답(√2/2, 1/(√2 e), 8)이 일치합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64142,19 +64332,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 1–4).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2026학년도 오전",
       "session": "오전",
       "mainQuestion": 1,
       "paperId": "ih-2026-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+      "resolvedPages": "1–4",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
     },
     {
       "caseId": "ih-2026-am-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료).",
+      "summary": "공식 자료 대조 완료(인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–8). 정답과 (2-3) 극한 풀이는 유지하고, 공식 채점기준에 따라 (2-1)에서 g(x)의 x=0 불연속·기타 점 연속 근거와 (2-2)에서 g(x)의 x=-1,0,1 미분불가능 근거(5점)를 보완했습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64174,19 +64367,22 @@
           "url": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드, 5–8).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "인하대",
       "year": "2026학년도 오전",
       "session": "오전",
       "mainQuestion": 2,
       "paperId": "ih-2026-am",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "인하대학교 2026학년도 수시모집 논술고사(자연오전) 문제지 및 문항카드",
+      "resolvedPages": "5–8",
+      "resolvedSourceUrl": "https://admission.inha.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=2&SITE_NO=2&BBS_SEQ=204&FILE_SEQ=1"
     },
     {
       "caseId": "kw-2025-1-2",
-      "summary": "빠른검토에서뚜렷한누락없음(공식대조미완료)",
+      "summary": "공식 자료 대조 완료(광운대학교 2026학년도 논술우수자전형 가이드북 · 2025학년도 기출 (자연계열 1교시 2번), 29–37). 전 소문항 정답은 공식 예시 답안과 일치하며, 채점 기준(p.32)과 총평(p.36–37) 지적에 따라 [3]의 $f^n, g^n$ 귀납 단계·교점 풀이 근거와 [4]-(2)의 구간별 후보 해 배제 과정을 보완했습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64206,19 +64402,22 @@
           "url": "https://iphak.kw.ac.kr/upload_data/mojib/20250605091213_13.pdf#page=17"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (광운대학교 2026학년도 논술우수자전형 가이드북 · 2025학년도 기출 (자연계열 1교시 2번), 29–37).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "광운대",
       "year": "2025학년도 1교시",
       "session": "1교시",
       "mainQuestion": 2,
       "paperId": "kw-2025-1",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "광운대학교 2026학년도 논술우수자전형 가이드북 · 2025학년도 기출 (자연계열 1교시 2번)",
+      "resolvedPages": "29–37",
+      "resolvedSourceUrl": "https://iphak.kw.ac.kr/upload_data/mojib/20250605091213_13.pdf#page=29"
     },
     {
       "caseId": "sj-2025-a-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–12 (문항2: 6–7, 8–9, 11–12)). 2025 자연 A형 공식 채점기준(p.8–9)과 예시답안(p.11–12)의 모든 배점 항목($S(t)$ 공식, 등비급수 수렴·합, 평균값 정리를 이용한 $g(t)$ 상수함수 증명과 초기값 적분)을 충족해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64235,19 +64434,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형, 6–12 (문항2: 6–7, 8–9, 11–12)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2025학년도 A형",
       "session": "A형",
       "mainQuestion": 2,
       "paperId": "sj-2025-a",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 A형",
+      "resolvedPages": "6–12 (문항2: 6–7, 8–9, 11–12)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=6"
     },
     {
       "caseId": "sj-2025-b-3",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 B형, 15–21 (문항3: 15–16, 17, 20–21)). 2025 자연 B형 공식 채점기준(p.17)과 예시답안(p.20–21)의 모든 배점 항목($F(-x)$ 치환, $x\\le 0$과 $x>0$ 구간별 $g'(x)$ 부호 판정, 대칭 치환적분 $\\frac{C^2}{6}$)을 충족해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64265,19 +64467,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=15"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 B형, 15–21 (문항3: 15–16, 17, 20–21)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2025학년도 B형",
       "session": "B형",
       "mainQuestion": 3,
       "paperId": "sj-2025-b",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "세종대학교 2025학년도 논술(논술우수자 전형) 기출문제집 · 자연계열 B형",
+      "resolvedPages": "15–21 (문항3: 15–16, 17, 20–21)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2720&attachNo=2820#page=15"
     },
     {
       "caseId": "sj-2027-mock-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 2, 6–7, 14–16). 2027 모의논술 공식 모범답안(p.6–7)과 채점기준표(p.14–16)의 핵심 항목($f'(x)>0$, 역함수 이계도함수 부호 판정, $x=\\frac{1}{2}$ 유일 극대·최대 증명)을 모두 충족해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64293,19 +64498,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표, 2, 6–7, 14–16).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2027학년도 모의논술",
       "session": "모의논술",
       "mainQuestion": 2,
       "paperId": "sj-2027-mock",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2027학년도 세종대학교 온라인 모의논술고사(자연계열) 문제지·모범답안·채점기준표",
+      "resolvedPages": "2, 6–7, 14–16",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2726&attachNo=2866"
     },
     {
       "caseId": "sj-2026-a-2",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 2번, 77–81 (보고서 쪽수 74–78)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드6(PDF p.77–81)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 구간별 교점 개수가 완전히 일치해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64321,19 +64529,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 2번, 77–81 (보고서 쪽수 74–78)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2026학년도 A형",
       "session": "A형",
       "mainQuestion": 2,
       "paperId": "sj-2026-a",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 2번",
+      "resolvedPages": "77–81 (보고서 쪽수 74–78)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=77"
     },
     {
       "caseId": "sj-2026-a-3",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 3번, 82–86 (보고서 쪽수 79–83)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드7(PDF p.82–86)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 정답이 완전히 일치해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64349,19 +64560,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2869"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 3번, 82–86 (보고서 쪽수 79–83)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2026학년도 A형",
       "session": "A형",
       "mainQuestion": 3,
       "paperId": "sj-2026-a",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열A 문항 3번",
+      "resolvedPages": "82–86 (보고서 쪽수 79–83)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=82"
     },
     {
       "caseId": "sj-2026-b-1",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 1번, 87–91 (보고서 쪽수 84–88)). 2026학년도 선행학습 영향평가 자체평가보고서 문항카드8(PDF p.87–91)의 채점기준과 예시답안에 1:1 대조한 결과 모든 배점 항목과 정답이 완전히 일치해 기존 답안을 유지합니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64377,19 +64591,22 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 1번, 87–91 (보고서 쪽수 84–88)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2026학년도 B형",
       "session": "B형",
       "mainQuestion": 1,
       "paperId": "sj-2026-b",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 1번",
+      "resolvedPages": "87–91 (보고서 쪽수 84–88)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=87"
     },
     {
       "caseId": "sj-2026-b-3",
-      "summary": "빠른 검토에서 뚜렷한 누락 없음(공식 대조 미완료). 현재 problems와 answerAdd 전체를 이어 읽은 내부 검토 결과이며 공식 채점 충분성 판정은 보류한다.",
+      "summary": "공식 자료 대조 완료(2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 3번, 101–104 (보고서 쪽수 98–101)). 2026 선행학습 보고서 문항카드10(PDF p.101–104)과 대조한 결과, (3-3)에서 정의역 밖 $I_{102}$ 대신 공식 채점기준(+10점)에 맞춰 $I_{101}$($a_{101}$)을 직접 계산하고 (3-2)에서 증명한 범위 $1\\le n\\le 100$ 점화식만 적용하도록 `u2_a2`를 보완했습니다.",
       "checkedAnswerIds": [
         "u0_a1",
         "u0_a2",
@@ -64405,19 +64622,21 @@
           "url": "https://ipsi.sejong.ac.kr/ipsi/assistant/exam-questions.do?mode=download&articleNo=2724&attachNo=2870"
         }
       ],
-      "officialSourceStatus": "공식 자료 후보 링크. 이번 빠른 점검에서 전체 대조 완료를 뜻하지 않습니다.",
-      "checkedOn": "2026-11-23",
-      "method": "빠른 답안 점검 · 공식 채점자료 전체 대조 아님",
+      "officialSourceStatus": "공식 원문·해설·채점기준 대조 완료 (2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 3번, 101–104 (보고서 쪽수 98–101)).",
+      "checkedOn": "2026-11-24",
+      "method": "공식 채점자료 대조 완료 · ANSWER_REVIEW_LOG 동기화",
       "school": "세종대",
       "year": "2026학년도 B형",
       "session": "B형",
       "mainQuestion": 3,
       "paperId": "sj-2026-b",
-      "status": "no-obvious-gap"
+      "status": "resolved",
+      "resolvedSourceTitle": "2026학년도 세종대학교 선행학습 영향평가 자체평가보고서 · 자연계열B 문항 3번",
+      "resolvedPages": "101–104 (보고서 쪽수 98–101)",
+      "resolvedSourceUrl": "https://ipsi.sejong.ac.kr/ipsi/assistant/notice.do?mode=download&articleNo=2639&attachNo=2648#page=101"
     }
   ]
 };
-
     const UNIV_STRATEGY_DATA = {
   "광운대": {
     "examFormat": "120분 · 수학 2문항(각 50점, 소문항 5개 내외) · 논술 80% + 교과 20%",
@@ -75888,7 +76107,10 @@
       { id: "problem", label: "문제" },
       { id: "thought", label: "생각" },
       { id: "scratch", label: "연습지" },
-      { id: "answer", label: "답안지" }
+      { id: "answer", label: "답안지" },
+      { id: "coach", label: "기초 도우미" },
+      { id: "review", label: "검토 기록" },
+      { id: "tools", label: "연습 도구" }
     ];
 
     let proseSize = 15;
@@ -75911,7 +76133,7 @@
       autoPlaying: false,
       autoSpeed: 1.0,
       autoTimer: null,
-      visiblePanels: new Set(["passage", "problem", "thought", "scratch", "answer"]),
+      visiblePanels: new Set(["passage", "problem", "thought", "scratch", "answer", "coach", "review", "tools"]),
       bookmarks: {},
       completedCases: {},
       tracedAnswerId: null,
@@ -76071,6 +76293,7 @@
           timerSeconds: getTimerSeconds(),
           timerCountdownSec: state.timerCountdownSec || 0,
           visiblePanels: Array.from(state.visiblePanels),
+          panelToggleVersion: 2,
           bookmarks: state.bookmarks,
           completedCases: state.completedCases,
           completedRetiredCases: state.completedRetiredCases || {},
@@ -76175,6 +76398,13 @@
         if (Array.isArray(p.visiblePanels)) {
           const panels = p.visiblePanels.filter(pid => PANEL_META.some(pm => pm.id === pid));
           if (panels.length) state.visiblePanels = new Set(panels);
+          if (p.panelToggleVersion !== 2) {
+            if (state.beginnerMode) state.visiblePanels.add("coach");
+            state.visiblePanels.add("review");
+            state.visiblePanels.add("tools");
+          }
+          if (!state.beginnerMode) state.visiblePanels.delete("coach");
+          if (state.visiblePanels.size === 0) state.visiblePanels.add("thought");
         }
         state.bookmarks = Object.create(null);
         state.completedCases = Object.create(null);
@@ -76388,6 +76618,11 @@
     function renderQuickAudit(c, inMenu = false) {
       const audit = ANSWER_QUICK_AUDIT[c.id];
       if (!audit) return "";
+      if (!audit.items.length && (audit.status === "resolved" || audit.status === "example-checked")) {
+        if (!inMenu) return "";
+        const title = audit.status === "example-checked" ? "자체 제작 예시 · 내부 논증 점검 완료" : "보완 점검 메모 · 공식 대조로 해소 완료";
+        return `<div class="rounded border border-zinc-200 p-2.5 text-[11px] leading-relaxed text-zinc-600" data-quick-audit="${escapeHtml(c.id)}" data-audit-status="${escapeHtml(audit.status)}"><strong class="text-zinc-800">${title}</strong><p class="mt-1">${escapeHtml(audit.summary)}</p></div>`;
+      }
       const title = audit.items.length ? `이전 빠른 점검 · 메모 ${audit.items.length}건` : "빠른 답안 점검 · 뚜렷한 누락 미발견";
       const description = c.school === "튜토리얼" ? "자체 제작 예시의 내부 논증을 읽었습니다." : "이전 빠른 점검에서 남긴 후보입니다. 최신 답안과 공식 대조 기록에서 해결 여부를 확인하세요.";
       const content = `<p>${escapeHtml(audit.summary)}</p>${audit.items.map(item => renderQuickAuditItem(c, item, inMenu)).join("")}`;
@@ -76688,22 +76923,28 @@
       return u;
     }
 
+    function togglePanel(pid) {
+      if (state.visiblePanels.has(pid)) {
+        if (state.visiblePanels.size === 1) return;
+        state.visiblePanels.delete(pid);
+      } else {
+        state.visiblePanels.add(pid);
+        if (pid === "coach" && !state.beginnerMode) { state.beginnerMode = true; syncLearningUI(); }
+      }
+      renderPanelToggles(); renderPanels(); saveAppState();
+    }
+
     function renderPanelToggles() {
       const hiddenUpdated = getUpdatedHiddenPanels();
       const markup = PANEL_META.map(pm => {
         const on = state.visiblePanels.has(pm.id);
         const ping = !on && hiddenUpdated.has(pm.id);
-        return `<button type="button" data-panel="${pm.id}" aria-pressed="${on}" class="panel-toggle-btn text-xs font-semibold px-2.5 py-1 rounded-md transition shrink-0 ${on ? "bg-zinc-900 text-white" : ping ? "bg-amber-100 text-zinc-900 border border-amber-400" : "text-zinc-400 hover:text-zinc-800 hover:bg-zinc-100"}">${pm.label}${ping ? " •" : ""}</button>`;
+        return `<button type="button" data-panel="${pm.id}" aria-pressed="${on}" class="panel-toggle-btn text-xs font-semibold px-2 py-1 rounded-md transition shrink-0 ${on ? "bg-zinc-900 text-white" : ping ? "bg-amber-100 text-zinc-900 border border-amber-400" : "text-zinc-400 hover:text-zinc-800 hover:bg-zinc-100"}">${pm.label}${ping ? " •" : ""}</button>`;
       }).join("");
       ["panelToggles", "mobilePanelToggles"].forEach(id => {
         const el = document.getElementById(id);
         el.innerHTML = markup;
-        el.querySelectorAll(".panel-toggle-btn").forEach(btn => btn.addEventListener("click", () => {
-          const pid = btn.dataset.panel;
-          if (state.visiblePanels.has(pid)) { if (state.visiblePanels.size === 1) return; state.visiblePanels.delete(pid); }
-          else state.visiblePanels.add(pid);
-          renderPanelToggles(); renderPanels(); saveAppState();
-        }));
+        el.querySelectorAll(".panel-toggle-btn").forEach(btn => btn.addEventListener("click", () => togglePanel(btn.dataset.panel)));
       });
     }
 
@@ -76877,7 +77118,7 @@
     function renderBeginnerCoach(c, hideOutput) {
       if (!state.beginnerMode) return "";
       const card = getBeginnerCard(c);
-      if (!card) return `<div class="learning-card"><strong>추가 문항을 읽는 순서</strong><p>구할 것에 밑줄 → 주어진 조건을 한 줄씩 식으로 → 각 변형의 이유를 말로 → 마지막에 답안으로 정리하세요.</p><button type="button" data-open-foundations class="foundation-chip">기초 카드 열기</button></div>`;
+      if (!card) return `<section data-panel="coach" class="learning-card"><strong>추가 문항을 읽는 순서</strong><p>구할 것에 밑줄 → 주어진 조건을 한 줄씩 식으로 → 각 변형의 이유를 말로 → 마지막에 답안으로 정리하세요.</p><button type="button" data-open-foundations class="foundation-chip">기초 카드 열기</button></section>`;
       const key = learningKey(c, card.label);
       const hidden = hideOutput;
       const showAll = state.learningPreview[key] === true && !hidden;
@@ -76886,7 +77127,7 @@
       const block = eligible[chunk];
       const level = { start: "기초 카드 뒤에 시작", bridge: "선수 개념을 연결해 보기", advanced: "기초 확인 뒤 도전" }[card.level] || "기초부터 연결";
       const symbols = hidden ? [] : getSymbolHelp(c.steps[state.step - 1]);
-      return `<div class="learning-card" data-learning-card="${escapeHtml(card.label)}">
+      return `<section data-panel="coach" class="learning-card" data-learning-card="${escapeHtml(card.label)}">
         <div class="flex flex-wrap items-center justify-between gap-2"><strong>기초 풀이 도우미 · ${escapeHtml(card.label)}</strong><span class="text-[11px]">${level}</span></div>
         <p class="prose-math"><b>지금 구할 것:</b> ${safeMathHtml(card.goal)}</p>
         <div><div class="text-xs font-bold mb-1">모르는 말이 있으면 먼저 눌러 보세요</div><div class="flex flex-wrap gap-1">${card.prerequisites.map(foundationButton).join("")}</div></div>
@@ -76900,7 +77141,7 @@
           ${eligible.length === card.walkthrough.length ? `<div class="learning-check"><b>손으로 한 번 확인</b><p class="prose-math mt-1">${safeMathHtml(card.check.question)}</p><details class="learning-details"><summary>직접 해 본 뒤 답 확인</summary><div class="prose-math mt-2">${safeMathHtml(card.check.answer)}</div></details></div>` : ""}
         `}
         <button type="button" data-learning-copy class="text-xs underline py-1">이 단계가 막히면 AI에게 물어볼 내용 복사</button>
-      </div>`;
+      </section>`;
     }
     function syncLearningUI() {
       document.body.classList.toggle("beginner-mode", state.beginnerMode);
@@ -77013,6 +77254,12 @@
     function renderPanels() {
       const gridBefore = document.getElementById("deskGrid");
       const previousScroll = new Map(Array.from(gridBefore.children).map(el => [el.dataset.column, el.scrollTop]));
+      const openDetailsKeys = new Set();
+      gridBefore.querySelectorAll("details[open]").forEach(det => {
+        const sum = det.querySelector(":scope > summary")?.textContent?.trim();
+        const panel = det.closest("[data-panel]")?.dataset.panel || "";
+        if (sum) openDetailsKeys.add(panel + "::" + sum);
+      });
       const focused = document.activeElement;
       const focusKey = focused && gridBefore.contains(focused) ? {
         ans: focused.dataset.ansId, sub: focused.dataset.quickSub, id: focused.id
@@ -77178,7 +77425,6 @@
                 <span class="text-xs font-bold text-zinc-400">반응</span>
                 ${activeSubQ ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-600">소문항 ${escapeHtml(activeSubQ)}${filterSub ? " · 연결 근거 포함" : ""}</span>` : ""}
               </div>
-              ${renderBeginnerCoach(curCase, hideOutput)}
               ${hideOutput
                 ? `<div class="text-xs text-zinc-600 py-1.5 flex items-center justify-between gap-2"><span>노란 시선에서 어떤 생각이 떠올라야 할까요?</span><button type="button" id="inlineRevealBtn" class="px-2.5 py-1 rounded bg-zinc-900 text-white font-bold shrink-0">확인 →</button></div>`
                 : acc.currentReaction
@@ -77218,6 +77464,9 @@
             }
           </section>`;
       }
+      const renderToolsBlock = (c, defaultOpen = false) => state.beginnerMode
+        ? `<details class="learning-details"${defaultOpen ? " open" : ""}><summary>해설 영상 · 내 답안 · 시험 연습 도구</summary><div class="mt-2">${renderPassResourcesAndWorkbench(c)}</div></details>`
+        : renderPassResourcesAndWorkbench(c);
       if (state.visiblePanels.has("answer")) {
         panelHtml.answer = `
           <section data-panel="answer" class="${boxCls("answer")} p-4 space-y-2.5">
@@ -77229,9 +77478,8 @@
                 <span class="text-[11px] text-zinc-300">${visibleAnswer.length ? `${visibleAnswer.length}문단` : "빈 종이"}</span>
               </div>
             </div>
-            ${renderAnswerReview(curCase)}
-            ${renderQuickAudit(curCase)}
-            ${state.beginnerMode ? `<details class="learning-details"><summary>해설 영상 · 내 답안 · 시험 연습 도구</summary><div class="mt-2">${renderPassResourcesAndWorkbench(curCase)}</div></details>` : renderPassResourcesAndWorkbench(curCase)}
+            ${state.visiblePanels.has("review") ? renderAnswerReview(curCase) + renderQuickAudit(curCase) : ""}
+            ${state.visiblePanels.has("tools") ? renderToolsBlock(curCase, false) : ""}
             ${visibleAnswer.length
               ? renderOutputGroups(visibleAnswer, an => {
                   const isTraced = state.tracedAnswerId === an.id;
@@ -77244,10 +77492,21 @@
           </section>`;
       }
 
+      if (state.visiblePanels.has("coach")) {
+        const coachMarkup = renderBeginnerCoach(curCase, hideOutput);
+        if (coachMarkup) panelHtml.coach = coachMarkup;
+      }
       const cols = [];
       const col1 = [panelHtml.passage, panelHtml.problem].filter(Boolean);
-      const col2 = [panelHtml.thought, panelHtml.scratch].filter(Boolean);
-      const col3 = [panelHtml.answer].filter(Boolean);
+      const col2 = [panelHtml.coach, panelHtml.thought, panelHtml.scratch].filter(Boolean);
+      if (!state.visiblePanels.has("answer") && (state.visiblePanels.has("review") || state.visiblePanels.has("tools"))) {
+        const extraBlocks = [
+          state.visiblePanels.has("review") ? renderAnswerReview(curCase) + renderQuickAudit(curCase) : "",
+          state.visiblePanels.has("tools") ? renderToolsBlock(curCase, true) : ""
+        ].filter(Boolean).join("");
+        if (extraBlocks) panelHtml.answerExtras = `<section data-panel="answer-extras" class="panel-box p-4 space-y-2.5">${extraBlocks}</section>`;
+      }
+      const col3 = [panelHtml.answer, panelHtml.answerExtras].filter(Boolean);
       if (col1.length) cols.push({ id: "paper", html: col1.join("") });
       if (col2.length) cols.push({ id: "work", html: col2.join("") });
       if (col3.length) cols.push({ id: "answer", html: col3.join("") });
@@ -77258,7 +77517,16 @@
       grid.innerHTML = cols.map(col => `<div data-column="${col.id}" class="min-w-0 space-y-3.5 xl:max-h-[calc(100vh-10.5rem)] xl:overflow-y-auto panel-scroll pr-0.5">${col.html}</div>`).join("");
 
       renderMathIn(grid);
-      if (!caseChanged) Array.from(grid.children).forEach(el => { el.scrollTop = previousScroll.get(el.dataset.column) || 0; });
+      if (!caseChanged) {
+        if (openDetailsKeys.size) {
+          grid.querySelectorAll("details").forEach(det => {
+            const sum = det.querySelector(":scope > summary")?.textContent?.trim();
+            const panel = det.closest("[data-panel]")?.dataset.panel || "";
+            if (sum && openDetailsKeys.has(panel + "::" + sum)) det.open = true;
+          });
+        }
+        Array.from(grid.children).forEach(el => { el.scrollTop = previousScroll.get(el.dataset.column) || 0; });
+      }
       if (focusKey) {
         const elements = Array.from(grid.querySelectorAll("button, [role='button']"));
         const replacement = elements.find(el => focusKey.ans ? el.dataset.ansId === focusKey.ans : focusKey.sub ? el.dataset.quickSub === focusKey.sub : focusKey.id && el.id === focusKey.id);
@@ -77730,10 +77998,14 @@
     }
     document.getElementById("downloadQuickAuditBtn").addEventListener("click", () => downloadTextFile("답안-빠른점검-후속작업.json", JSON.stringify(ANSWER_QUICK_AUDIT_BUNDLE, null, 2), "application/json;charset=utf-8"));
     document.getElementById("downloadQuickAuditTextBtn").addEventListener("click", () => {
-      const lines = ["답안 빠른 점검 · 다음 AI 작업 체크", "공식자료 전체 대조 또는 확정 오답 판정이 아닙니다. 원문과 공식 채점자료로 확인한 뒤 필요한 부분만 수정하세요.", ""];
+      const lines = ["답안 보완 점검 · 처리 현황 (총 " + Object.keys(ANSWER_QUICK_AUDIT).length + "건)", "전체 70개 기출·모의 대문항 공식 PDF 대조 완료(reviewed 69건, 원문 조건 주의 1건: kw-2026-2-2) 및 튜토리얼 1건 내부 점검 완료.", ""];
       Object.values(ANSWER_QUICK_AUDIT).forEach(audit => {
-        lines.push(`${audit.school} · ${audit.year} · ${audit.session} · ${audit.caseId}`, audit.summary);
-        if (!audit.items.length) lines.push("- 빠른 점검에서 뚜렷한 누락 미발견. 공식자료 대조·충분성 승인은 별도입니다.");
+        lines.push(`${audit.school} · ${audit.year} · ${audit.session} · ${audit.caseId} [${audit.status}]`, audit.summary);
+        if (!audit.items.length) {
+          if (audit.status === "resolved") lines.push(`- 공식 자료 대조 완료 및 보완 점검 해소됨 (근거: ${audit.resolvedSourceTitle || "공식 자료"}, ${audit.resolvedPages || "해당 쪽"}).`);
+          else if (audit.status === "example-checked") lines.push("- 자체 제작 예시 내부 논증 점검 완료 (공식 기출 대조 대상 제외).");
+          else lines.push("- 빠른 점검에서 뚜렷한 누락 미발견. 공식자료 대조·충분성 승인은 별도입니다.");
+        }
         audit.items.forEach(item => lines.push(`[${item.priority}] ${item.subQuestion} · ${item.kind}`, "현재: " + item.finding, "보완: " + item.action, "공식 대조: " + item.officialCheck, ...item.locations.map(loc => `위치: ${audit.caseId} / ${loc.answerId} / Step ${loc.step} / ${loc.jsonPath}`), ""));
         lines.push("");
       });
@@ -77837,9 +78109,7 @@
     document.getElementById("exportCustomCasesBtn").addEventListener("click", () => {
       const custom = REPLAY_CASES.filter(c => !BASE_REPLAY_CASES.some(b => b.id === c.id));
       if (!custom.length) { showToast("백업할 추가 기출이 없습니다."); return; }
-      const url = URL.createObjectURL(new Blob([JSON.stringify(custom, null, 2)], { type: "application/json;charset=utf-8" }));
-      const link = document.createElement("a"); link.href = url; link.download = "nonsul-custom-cases.json";
-      document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+      downloadTextFile("nonsul-custom-cases.json", JSON.stringify(custom, null, 2), "application/json;charset=utf-8");
       showToast("추가 기출 JSON을 저장했어요. 불러오기에서 다시 넣을 수 있습니다.");
     });
     document.getElementById("clearCustomCasesBtn").addEventListener("click", () => {
@@ -77851,6 +78121,8 @@
       REPLAY_CASES.filter(c => !BASE_REPLAY_CASES.some(b => b.id === c.id)).forEach(c => {
         delete state.stepByCase[c.id]; delete state.revealByCase[c.id];
         delete state.bookmarks[c.id]; delete state.completedCases[c.id];
+        delete state.masteryByCase[c.id]; delete state.userNotes[c.id];
+        delete state.selfScoreByCase[c.id]; delete state.selfChecks[c.id];
       });
       REPLAY_CASES = [...BASE_REPLAY_CASES];
       headerSchoolFilter = null;
@@ -77894,11 +78166,8 @@
       else if (e.key === "l" || e.key === "L") { e.preventDefault(); openFoundations(); }
       else if (e.key === "s" || e.key === "S") toggleSubOnlyMode();
       else if (e.key === "d" || e.key === "D") toggleDarkMode();
-      else if (["1","2","3","4","5"].includes(e.key)) {
-        const pid = PANEL_META[Number(e.key) - 1].id;
-        if (state.visiblePanels.has(pid)) { if (state.visiblePanels.size > 1) state.visiblePanels.delete(pid); }
-        else state.visiblePanels.add(pid);
-        renderPanelToggles(); renderPanels(); saveAppState();
+      else if (["1","2","3","4","5","6","7","8"].includes(e.key)) {
+        togglePanel(PANEL_META[Number(e.key) - 1].id);
       }
     });
 
@@ -77941,7 +78210,7 @@
     document.getElementById("closeLearningModal").addEventListener("click", () => closeModal("learningModal"));
     document.getElementById("foundationSearch").addEventListener("input", e => { foundationQuery = e.target.value; renderFoundationModal(); });
     document.getElementById("beginnerModeBtn").addEventListener("click", () => {
-      stopAutoPlay(); state.beginnerMode = !state.beginnerMode; syncLearningUI(); renderPanels(); saveAppState();
+      stopAutoPlay(); state.beginnerMode = !state.beginnerMode; if (state.beginnerMode) state.visiblePanels.add("coach"); else { state.visiblePanels.delete("coach"); if (state.visiblePanels.size === 0) state.visiblePanels.add("thought"); } syncLearningUI(); renderPanelToggles(); renderPanels(); saveAppState();
     });
     document.addEventListener("click", e => {
       const element = e.target instanceof Element ? e.target : null;
@@ -77965,8 +78234,8 @@
         const target = starts.find(s => s.label === label || s.label.includes(label));
         closeModal("learningModal"); switchCase(c.id, true);
         state.step = target ? target.step : 0; state.predictRevealed = !state.predictMode || state.step === 0;
-        state.subOnlyMode = true; state.visiblePanels.add("thought"); state.visiblePanels.add("problem");
-        syncModeButtons(); renderPanels(); saveAppState();
+        state.subOnlyMode = true; state.beginnerMode = true; state.visiblePanels.add("coach"); state.visiblePanels.add("thought"); state.visiblePanels.add("problem");
+        syncLearningUI(); syncModeButtons(); renderPanelToggles(); renderPanels(); saveAppState();
         document.querySelector("[data-learning-card]")?.scrollIntoView({ behavior: "instant", block: "start" }); return;
       }
       const preview = element.closest("[data-learning-preview]");
@@ -77982,7 +78251,7 @@
 
     document.addEventListener("input", e => { if (e.target?.id === "foundationVisualRange") document.getElementById("foundationVisualResult").innerHTML = foundationVisualResult(activeFoundation, Number(e.target.value)); });
     document.getElementById("currentHelpBtn").addEventListener("click", () => {
-      state.beginnerMode = true; state.visiblePanels.add("thought"); syncLearningUI(); renderPanels(); saveAppState();
+      state.beginnerMode = true; state.visiblePanels.add("coach"); syncLearningUI(); renderPanelToggles(); renderPanels(); saveAppState();
       const coach = document.querySelector("#deskGrid .learning-card");
       coach?.setAttribute("tabindex", "-1"); coach?.focus({ preventScroll: true }); coach?.scrollIntoView({ behavior: "instant", block: "start" });
     });
@@ -78012,7 +78281,8 @@
 
     // 합격 워크벤치 & 실전 카운트다운 이벤트
     document.addEventListener("click", e => {
-            const tTab = e.target.closest("[data-cat-topic]");
+      if (!(e.target instanceof Element)) return;
+      const tTab = e.target.closest("[data-cat-topic]");
       if (tTab) {
         catalogTopicFilter = tTab.dataset.catTopic;
         renderCatalogInMenu();
@@ -78035,13 +78305,7 @@
         if (mBtn.dataset.masterySet === "pass") state.completedCases[cur.id] = true;
         saveAppState();
         renderCaseSelect();
-        const wb = mBtn.closest("[data-pass-workbench]");
-        const wasOpen = wb && wb.open;
         renderPanels();
-        if (wasOpen) {
-          const nw = document.querySelector(`[data-pass-workbench="${cur.id}"]`);
-          if (nw) nw.open = true;
-        }
         return;
       }
       const copyBtn = e.target.closest("#copyAiGradePromptBtn");
@@ -78067,19 +78331,14 @@
     });
 
     document.addEventListener("change", e => {
-      const chk = e.target && e.target.closest("[data-self-check]");
+      if (!(e.target instanceof Element)) return;
+      const chk = e.target.closest("[data-self-check]");
       if (chk) {
         const cur = getCurrentCase();
         if (!state.selfChecks[cur.id]) state.selfChecks[cur.id] = {};
         state.selfChecks[cur.id][chk.dataset.selfCheck] = chk.checked;
         saveAppState();
-        const wb = chk.closest("[data-pass-workbench]");
-        const wasOpen = wb && wb.open;
         renderPanels();
-        if (wasOpen) {
-          const nw = document.querySelector(`[data-pass-workbench="${cur.id}"]`);
-          if (nw) nw.open = true;
-        }
       }
     });
 
